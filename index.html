@@ -339,6 +339,35 @@ td:nth-child(2) { color: var(--muted); width: 33%; }
 .season strong { font-family: var(--f-display); font-stretch: 80%; font-weight: 800; font-size: 1.375rem; line-height: 1.1; }
 .season span { color: var(--muted); font-size: 0.9375rem; }
 
+/* 2027 calendar */
+.gantt-scroll { overflow-x: auto; border-top: 2px solid var(--ink); }
+.gantt { display: grid; grid-template-columns: 9.5rem repeat(12, minmax(0, 1fr)); grid-template-rows: 2.25rem repeat(5, 2.75rem); min-width: 46rem; position: relative; }
+.g-month { grid-row: 1 / -1; border-left: 1px solid var(--line); font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); padding: 0.6rem 0 0 0.4rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.g-label { grid-column: 1; align-self: center; font-size: 0.875rem; font-weight: 600; padding-right: 0.75rem; }
+.g-bar { align-self: center; margin: 0 3px; height: 1.9rem; display: flex; align-items: center; padding: 0 0.5rem; font-size: 0.75rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; z-index: 1; min-width: 0; }
+.g-bar.pcl, .sw.g-pcl { background: var(--court); color: var(--on-court); border: 1px solid var(--court); }
+.g-bar.yuk, .sw.g-yuk { background: var(--red-soft); color: var(--ink); border: 1px solid var(--red); }
+.g-bar.dy, .sw.g-dy { background: var(--red); color: var(--on-court); border: 1px solid var(--red); }
+.g-bar.tr, .sw.g-tr { background: transparent; color: var(--muted); border: 1px dashed var(--muted); }
+.months { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+@media (min-width: 720px) { .months { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2.5rem; } }
+@media (min-width: 1000px) { .months { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.months li { display: grid; gap: 0.25rem; align-content: start; padding: 1rem 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.months .phase { font-family: var(--f-mono); font-size: var(--step--1); color: var(--court-ink); }
+.months strong { font-family: var(--f-display); font-stretch: 80%; font-weight: 800; font-size: 1.25rem; line-height: 1.15; }
+.months li > span:last-child { color: var(--muted); font-size: 0.9375rem; }
+.releg { margin-top: 3rem; }
+.ties { display: grid; gap: 1rem; }
+@media (min-width: 720px) { .ties { grid-template-columns: 1fr 1fr; } }
+.tie { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; border: 1px solid var(--line); background: var(--surface); min-width: 0; }
+.side { padding: 1rem 1.125rem; display: grid; gap: 0.125rem; min-width: 0; }
+.side span { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.side b { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 2.5rem; line-height: 1; }
+.side.up b { color: var(--court-ink); }
+.side.yuk { text-align: right; }
+.side.yuk b { color: var(--red); }
+.tie-vs { display: grid; place-items: center; padding: 0 0.75rem; font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); border-inline: 1px solid var(--line); }
+
 /* CTA */
 .cta { background: var(--court-deep); color: var(--on-court); margin-top: 4.5rem; }
 .cta .wrap { padding-block: 3.5rem; display: grid; gap: 1.5rem; }
@@ -373,6 +402,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <a href="#destek">Lig desteği</a>
         <a href="#sponsorluk">Sponsorluk</a>
         <a href="#forma">Forma</a>
+        <a href="#sezon">2027 takvimi</a>
       </nav>
     </div>
 
@@ -518,13 +548,13 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
       <div class="block-head">
         <span class="eyebrow">Takım sahipliği</span>
         <h2>Takım sahibi yatırım yapar, karşılığında kalıcı bir varlık edinir</h2>
-        <p class="lede">Slot bir sezonluk katılım hakkı değil, sahibinin değerini büyüttüğü bir varlık. Lig ilk sezonlarda kapalı yapıdadır, küme düşme yoktur. Slotun satışı ve devri her zaman organizasyonun onayına bağlıdır.</p>
+        <p class="lede">Slot bir sezonluk katılım hakkı değil, sahibinin değerini büyüttüğü bir varlık. 2027 sonunda bir kereye mahsus düşme-yükselme oynanır. Slotun satışı ve devri her zaman organizasyonun onayına bağlıdır.</p>
       </div>
       <div class="ledger">
         <div>
           <h3>Takım sahibinin hakları</h3>
           <ul>
-            <li><strong>Kalıcı slot</strong><span>Satılabilir ve devredilebilir. Devir için organizasyon onayı şarttır.</span></li>
+            <li><strong>Kalıcı slot</strong><span>2027 sonundaki tek düşme-yükselmeden sonra kalıcıdır. Satılabilir ve devredilebilir, devir için organizasyon onayı şarttır.</span></li>
             <li><strong>Gelir paylaşımı</strong><span>Lig sponsorluk ve yayın gelirlerinden yıllık pay.</span></li>
             <li><strong>Kendi ticari hakları</strong><span>Forma sponsoru, takım sponsorları, ürün satışı.</span></li>
             <li><strong>Marka ve şehir temsili</strong><span>Kulüp, şirket ya da şehir kimliğiyle lige girme.</span></li>
@@ -719,15 +749,74 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
   <section class="block" id="sezon">
     <div class="wrap">
       <div class="block-head">
-        <span class="eyebrow">Sezon akışı</span>
-        <h2>Bir sezon dört aşamada ilerler</h2>
+        <span class="eyebrow">2027 takvimi</span>
+        <h2>İlk sezon: 2027</h2>
+        <p class="lede">Normal sezon iki devrede oynanır. Yazın Yükselme Ligi oynanır. Sezon sonunda bir kereye mahsus düşme-yükselme maçları yapılır ve 2028'in 8 takımı belirlenir.</p>
       </div>
-      <ol class="season">
-        <li><span class="phase">Aşama 1</span><strong>Kadro ve transfer</strong><span>Takımlar kadrolarını kurar, yabancı oyuncular açıklanır.</span></li>
-        <li><span class="phase">Aşama 2</span><strong>Normal sezon</strong><span>Çift devreli lig: 8 takımla 14 hafta, her hafta 4 karşılaşma.</span></li>
-        <li><span class="phase">Aşama 3</span><strong>Playoff</strong><span>İlk 4 takım eleme usulüyle oynar.</span></li>
-        <li><span class="phase">Aşama 4</span><strong>Final hafta sonu</strong><span>Şampiyon tek bir büyük etkinlikte belirlenir.</span></li>
+
+      <div class="gantt-scroll">
+        <div class="gantt" aria-label="2027 sezon takvimi, aylara göre">
+          <div class="g-month" style="grid-column:2">Oca</div>
+          <div class="g-month" style="grid-column:3">Şub</div>
+          <div class="g-month" style="grid-column:4">Mar</div>
+          <div class="g-month" style="grid-column:5">Nis</div>
+          <div class="g-month" style="grid-column:6">May</div>
+          <div class="g-month" style="grid-column:7">Haz</div>
+          <div class="g-month" style="grid-column:8">Tem</div>
+          <div class="g-month" style="grid-column:9">Ağu</div>
+          <div class="g-month" style="grid-column:10">Eyl</div>
+          <div class="g-month" style="grid-column:11">Eki</div>
+          <div class="g-month" style="grid-column:12">Kas</div>
+          <div class="g-month" style="grid-column:13">Ara</div>
+          <div class="g-label" style="grid-row:2">Kadro ve transfer</div>
+          <div class="g-bar tr" style="grid-row:2;grid-column:2 / 4">Transfer dönemi</div>
+          <div class="g-bar tr" style="grid-row:2;grid-column:13 / 14">2028</div>
+          <div class="g-label" style="grid-row:3">PCL normal sezon</div>
+          <div class="g-bar pcl" style="grid-row:3;grid-column:4 / 7">1. devre · 7 hafta</div>
+          <div class="g-bar pcl" style="grid-row:3;grid-column:10 / 12">2. devre · 7 hafta</div>
+          <div class="g-label" style="grid-row:4">Yükselme Ligi</div>
+          <div class="g-bar yuk" style="grid-row:4;grid-column:7 / 10">Tek seferlik lig</div>
+          <div class="g-label" style="grid-row:5">Düşme-yükselme</div>
+          <div class="g-bar dy" style="grid-row:5;grid-column:12 / 13">Maçlar</div>
+          <div class="g-label" style="grid-row:6">Playoff ve final</div>
+          <div class="g-bar pcl" style="grid-row:6;grid-column:12 / 13">Playoff</div>
+          <div class="g-bar pcl" style="grid-row:6;grid-column:13 / 14">Final</div>
+        </div>
+      </div>
+      <div class="kit-legend">
+        <span><i class="sw g-pcl"></i>PCL</span>
+        <span><i class="sw g-yuk"></i>Yükselme Ligi</span>
+        <span><i class="sw g-dy"></i>Düşme-yükselme</span>
+        <span><i class="sw g-tr"></i>Transfer dönemi</span>
+      </div>
+
+      <ol class="months">
+        <li><span class="phase">Ocak – Şubat</span><strong>Kadro ve transfer</strong><span>Takımlar 6 kişilik kadrolarını tescil ettirir. Şubat'ta forma lansmanı ve medya günü.</span></li>
+        <li><span class="phase">Mart – Mayıs</span><strong>Normal sezon, 1. devre</strong><span>Her takım diğer 7 takımla bir kez karşılaşır. 7 maç haftası, her haftada 4 karşılaşma.</span></li>
+        <li><span class="phase">Haziran – Ağustos</span><strong>Yükselme Ligi</strong><span>PCL sezon arasındayken Yükselme Ligi oynanır. İlk iki takım düşme-yükselme maçlarına kalır.</span></li>
+        <li><span class="phase">Eylül – Ekim</span><strong>Normal sezon, 2. devre</strong><span>İkinci 7 maç haftası. Sezon sonunda ilk 4 playoff'a, son 2 düşme-yükselmeye kalır.</span></li>
+        <li><span class="phase">Kasım</span><strong>Playoff ve düşme-yükselme</strong><span>İlk 4 takım şampiyonluk için, son 2 takım PCL'de kalmak için oynar.</span></li>
+        <li><span class="phase">Aralık</span><strong>Final hafta sonu</strong><span>Şampiyon belirlenir. 2028 transfer dönemi açılır.</span></li>
       </ol>
+
+      <div class="releg">
+        <div class="block-head" style="margin-bottom:1.25rem">
+          <h3>Düşme-yükselme: 2027'de bir kereye mahsus</h3>
+          <p style="color:var(--muted)">PCL'nin son iki takımı, Yükselme Ligi'nin ilk iki takımıyla karşılaşır. Her eşleşme normal karşılaşma formatında oynanır: üç maçın ikisini alan kazanır. Kazananlar 2028'de PCL'de oynar.</p>
+        </div>
+        <div class="ties">
+          <div class="tie">
+            <div class="side up"><span>PCL</span><b>8.</b></div>
+            <div class="tie-vs">karşı</div>
+            <div class="side yuk"><span>Yükselme Ligi</span><b>1.</b></div>
+          </div>
+          <div class="tie">
+            <div class="side up"><span>PCL</span><b>7.</b></div>
+            <div class="tie-vs">karşı</div>
+            <div class="side yuk"><span>Yükselme Ligi</span><b>2.</b></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
