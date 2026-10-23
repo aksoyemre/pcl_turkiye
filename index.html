@@ -166,7 +166,7 @@ a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-rad
 /* ---------- Sections ---------- */
 section.block { padding-block: 4.5rem 0; }
 section.block:last-of-type { padding-bottom: 4.5rem; }
-.block-head { display: grid; gap: 0.75rem; margin-bottom: 2rem; }
+.block-head { display: grid; gap: 0.75rem; margin-bottom: 2rem; align-content: start; }
 .split { display: grid; gap: 2rem; }
 @media (min-width: 860px) { .split { grid-template-columns: 1fr 1fr; gap: 3rem; } }
 .split > * { min-width: 0; }
@@ -221,28 +221,11 @@ td:nth-child(2) { color: var(--muted); width: 33%; }
 .legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: var(--step--1); color: var(--muted); margin-top: 0.75rem; }
 .legend span { display: inline-flex; gap: 0.375rem; align-items: center; }
 
-/* Match order */
-.order { display: grid; gap: 0; border-top: 2px solid var(--ink); counter-reset: m; }
-.order li { list-style: none; display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
-.order li::before {
-  counter-increment: m;
-  content: counter(m);
-  font-family: var(--f-display);
-  font-stretch: 72%;
-  font-weight: 800;
-  font-size: 2rem;
-  line-height: 1;
-  color: var(--court-ink);
-}
-.order { padding: 0; margin: 0; }
-.order strong { display: block; }
-.order span { color: var(--muted); font-size: 0.9375rem; }
 .points { width: 100%; min-width: 0; margin-top: 1.25rem; }
 .points td, .points th { padding-right: 0.5rem; }
 .points td:first-child { width: auto; font-family: var(--f-mono); font-weight: 500; font-variant-numeric: tabular-nums; }
 .points td:nth-child(2) { width: auto; color: var(--ink); }
-.points td:last-child { text-align: right; font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 1.5rem; line-height: 1; }
-.points th:last-child { text-align: right; }
+.points td:first-child { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 1.5rem; line-height: 1.1; }
 
 /* Ownership */
 .ledger { display: grid; gap: 1.5rem; }
@@ -377,14 +360,14 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
             <text x="20.6" y="5" text-anchor="middle" transform="rotate(90 20.6 5)">FİLE ORTADA</text>
           </g>
         </svg>
-        <figcaption>Bir karşılaşma = bu kortta 3 maç: Kadınlar, Open, Mix.</figcaption>
+        <figcaption>Bir karşılaşma = bu kortta 3 maç. Takımın 6 oyuncusunun hepsi sahaya çıkar.</figcaption>
       </figure>
     </div>
 
     <div class="facts">
       <div class="fact"><b>8</b><span>kurucu takım, sabit slot</span></div>
-      <div class="fact"><b>3</b><span>kategori: Kadınlar, Mix, Open</span></div>
-      <div class="fact"><b>6</b><span>oyuncu her karşılaşmada sahada</span></div>
+      <div class="fact"><b>6</b><span>oyunculu takım, hepsi sahada</span></div>
+      <div class="fact"><b>3</b><span>maç her karşılaşmada</span></div>
       <div class="fact"><b>2</b><span>yabancı oyuncu sınırı</span></div>
     </div>
   </div>
@@ -412,7 +395,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
           <tbody>
             <tr><td>Lig hakkı</td><td>Partner takım slotu</td><td>Takım sahibine ait, lig onayıyla devredilebilir franchise slotu</td></tr>
             <tr><td>Antrenman üssü</td><td>Gaming house</td><td>Padel House: haftalık sabit kort saati, antrenör, kondisyoner, fizyoterapist</td></tr>
-            <tr><td>Kadro</td><td>Ana kadro, yedekler, ithal oyuncu sınırı</td><td>Kadınlar, Mix ve Open çiftleri, yedekler, en fazla 2 yabancı</td></tr>
+            <tr><td>Kadro</td><td>Ana kadro, yedekler, ithal oyuncu sınırı</td><td>6 kişilik takım, en az 3 kadın oyuncu, en fazla 2 yabancı</td></tr>
             <tr><td>Lig desteği</td><td>Aylık destek ve gelir payı</td><td>Aylık destek ve yıllık gelir paylaşımı, hedeflere bağlı</td></tr>
             <tr><td>Yayın ve içerik</td><td>Stüdyo maçları, yayın, sosyal medya</td><td>Merkezi etkinlik haftaları, cam kort yayını, takım içerik kotası</td></tr>
           </tbody>
@@ -427,39 +410,34 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <div>
           <div class="block-head">
             <span class="eyebrow">Takım yapısı</span>
-            <h2>Her takım üç çift çıkarır</h2>
-            <p class="lede">Kadınlar, Mix ve Open. Bir karşılaşmada her oyuncu tek maça çıkar. Bu yüzden takımlar derin kadro kurar ve sahaya en az altı farklı oyuncu çıkar.</p>
+            <h2>Takım 6 kişi. Bir karşılaşmada 6'sı da sahaya çıkar.</h2>
+            <p class="lede">Karşılaşma üç maçtan oluşur ve her oyuncu bir maçta oynar. Takımın tamamı her karşılaşmada kortta.</p>
           </div>
           <ul class="rules">
-            <li><b>8</b><span>kişilik kadro: 6 as oyuncu ve 2 yedek.</span></li>
-            <li><b>2</b><span>yabancı oyuncu, kadrodaki üst sınır.</span></li>
+            <li><b>6</b><span>oyunculu takım. 2. ve 3. maçın kuralı gereği en az 3'ü kadın.</span></li>
+            <li><b>2</b><span>yabancı oyuncu, takımdaki üst sınır.</span></li>
             <li><b>1</b><span>yabancı, bir çiftteki üst sınır. Sahadaki her çiftte en az bir Türk oyuncu oynar.</span></li>
           </ul>
         </div>
 
         <div>
-          <div class="lineup" aria-label="Örnek karşılaşma kadrosu">
+          <div class="lineup" aria-label="Karşılaşmadaki üç maç ve çift kuralları">
             <div class="row">
-              <div class="row-name">Kadınlar<small>2 kadın</small></div>
+              <div class="row-name">1. maç<small>Open</small></div>
+              <div class="pair"><span class="chip flex-slot">Kadın ya da erkek</span><span class="vs">+</span><span class="chip flex-slot">Kadın ya da erkek</span></div>
+            </div>
+            <div class="row">
+              <div class="row-name">2. maç<small>En az 1 kadın</small></div>
+              <div class="pair"><span class="chip"><i class="dot w"></i>Kadın</span><span class="vs">+</span><span class="chip flex-slot">Kadın ya da erkek</span></div>
+            </div>
+            <div class="row">
+              <div class="row-name">3. maç<small>2 kadın</small></div>
               <div class="pair"><span class="chip"><i class="dot w"></i>Kadın</span><span class="vs">+</span><span class="chip"><i class="dot w"></i>Kadın</span></div>
-            </div>
-            <div class="row">
-              <div class="row-name">Mix<small>1 kadın · 1 erkek</small></div>
-              <div class="pair"><span class="chip"><i class="dot w"></i>Kadın</span><span class="vs">+</span><span class="chip"><i class="dot"></i>Erkek</span></div>
-            </div>
-            <div class="row">
-              <div class="row-name">Open<small>Her oyuncuya açık</small></div>
-              <div class="pair"><span class="chip"><i class="dot"></i>Erkek</span><span class="vs">+</span><span class="chip"><i class="dot"></i>Erkek</span></div>
-            </div>
-            <div class="row">
-              <div class="row-name">Yedek<small>2 oyuncu</small></div>
-              <div class="pair"><span class="chip flex-slot">Kadın ya da erkek</span><span class="chip flex-slot">Kadın ya da erkek</span></div>
             </div>
           </div>
           <div class="legend">
-            <span><i class="dot w"></i>Kadın oyuncu</span>
-            <span><i class="dot"></i>Erkek oyuncu</span>
-            <span>Open kategorisi pratikte iki erkek oyuncuyla oynanır.</span>
+            <span><i class="dot w"></i>Kadın oyuncu zorunlu</span>
+            <span>Kesikli çerçeve: kadın ya da erkek oyuncu</span>
           </div>
         </div>
       </div>
@@ -468,32 +446,25 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
 
   <section class="block" id="format">
     <div class="wrap">
-      <div class="block-head">
-        <span class="eyebrow">Karşılaşma formatı</span>
-        <h2>Bir karşılaşma, üç maç, her maç puan getirir</h2>
-      </div>
       <div class="split">
-        <div>
-          <ol class="order">
-            <li><div><strong>Kadınlar</strong><span>Karşılaşmayı açan maç.</span></div></li>
-            <li><div><strong>Open</strong><span>Ortadaki maç.</span></div></li>
-            <li><div><strong>Mix</strong><span>Kapanış maçı. İki kategorinin oyuncuları aynı kortta.</span></div></li>
-          </ol>
-          <p style="margin-top:1.25rem;color:var(--muted)">Karşılaşma 2-0 olsa da üçüncü maç oynanır. İki maçı alan takım karşılaşmayı kazanır, ama puan tablosu skorun tamamını sayar.</p>
+        <div class="block-head">
+          <span class="eyebrow">Karşılaşma formatı</span>
+          <h2>Üç maçın ikisini alan kazanır</h2>
+          <p class="lede">İki takım karşı karşıya gelir ve sırayla üç maç oynar: Open, en az bir kadınlı çift ve kadın çifti. Üç maçın hepsi oynanır, karşılaşma 3-0 ya da 2-1 biter.</p>
         </div>
         <div>
           <div class="table-scroll">
             <table class="points">
-              <thead><tr><th scope="col">Skor</th><th scope="col">Sonuç</th><th scope="col">Puan</th></tr></thead>
+              <thead><tr><th scope="col">Skor</th><th scope="col">Sonuç</th></tr></thead>
               <tbody>
-                <tr><td>3–0</td><td>Galibiyet</td><td>3</td></tr>
-                <tr><td>2–1</td><td>Galibiyet</td><td>2</td></tr>
-                <tr><td>1–2</td><td>Mağlubiyet</td><td>1</td></tr>
-                <tr><td>0–3</td><td>Mağlubiyet</td><td>0</td></tr>
+                <tr><td>3–0</td><td>Galibiyet</td></tr>
+                <tr><td>2–1</td><td>Galibiyet</td></tr>
+                <tr><td>1–2</td><td>Mağlubiyet</td></tr>
+                <tr><td>0–3</td><td>Mağlubiyet</td></tr>
               </tbody>
             </table>
           </div>
-          <p style="margin-top:1rem;color:var(--muted);font-size:0.9375rem">Bu sistemde kaybedilmiş bir karşılaşmada alınan tek maç bile tabloyu değiştirir. Yayın son maça kadar canlı kalır.</p>
+          <p style="margin-top:1rem;color:var(--muted);font-size:0.9375rem">Kadın oyuncular her karşılaşmanın sonucunu doğrudan belirler: üç maçın ikisinde kadın oyuncu kortta.</p>
         </div>
       </div>
     </div>
@@ -546,7 +517,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
           <div class="flow-item"><strong>Takım sponsorları</strong><span>Forma, isim, ürün</span></div>
         </div>
         <div class="arrow" aria-hidden="true"></div>
-        <div class="flow-team"><strong>Takım</strong><span>8 kişilik kadro ve teknik ekip</span></div>
+        <div class="flow-team"><strong>Takım</strong><span>6 oyuncu ve teknik ekip</span></div>
         <div class="arrow" aria-hidden="true"></div>
         <div class="flow-col">
           <h4>Takımın harcadığı</h4>
@@ -586,13 +557,13 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
       <div class="block-head">
         <span class="eyebrow">Sponsorluk</span>
         <h2>Markanız kortun her yerinde</h2>
-        <p class="lede">Padel camla çevrili bir kortta oynanır ve yayında kamera markadan hiç ayrılmaz. PCL sponsorluğu lig, kategori ve takım seviyesinde kurgulanır.</p>
+        <p class="lede">Padel camla çevrili bir kortta oynanır ve yayında kamera markadan hiç ayrılmaz. PCL sponsorluğu lig, maç ve takım seviyesinde kurgulanır.</p>
       </div>
       <div class="assets">
         <div class="asset"><span class="tier">Lig</span><strong>İsim hakkı</strong><span>Ligin adında marka: "[Marka] PCL Türkiye".</span></div>
         <div class="asset"><span class="tier">Lig</span><strong>Cam ve file markalama</strong><span>Tüm karşılaşmalarda kortun yayına giren yüzeyleri.</span></div>
-        <div class="asset"><span class="tier">Kategori</span><strong>Kadınlar maçı sponsoru</strong><span>Kadın padelinin büyümesiyle anılan marka.</span></div>
-        <div class="asset"><span class="tier">Kategori</span><strong>Mix maçı sponsoru</strong><span>Her karşılaşmanın kapanış maçı.</span></div>
+        <div class="asset"><span class="tier">Maç</span><strong>Kadın çifti maçı sponsoru</strong><span>Her karşılaşmanın 3. maçı. Kadın padelinin büyümesiyle anılan marka.</span></div>
+        <div class="asset"><span class="tier">Maç</span><strong>Açılış maçı sponsoru</strong><span>Her karşılaşmayı açan Open maçı.</span></div>
         <div class="asset"><span class="tier">Yayın</span><strong>Altın sayı anı</strong><span>Oyunun düğümlendiği deuce sayısında ekran grafiği ve tekrar.</span></div>
         <div class="asset"><span class="tier">Yayın</span><strong>Skor tabelası ve istatistikler</strong><span>Yayın grafikleri ve maç sonu istatistik kartları.</span></div>
         <div class="asset"><span class="tier">Dijital</span><strong>Belgesel ve içerik serileri</strong><span>Padel House'tan sezon boyu kamera arkası.</span></div>
@@ -626,7 +597,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
     </div>
     <ul>
       <li>Lig sponsorluğu ve isim hakkı</li>
-      <li>Kategori ve yayın sponsorluğu</li>
+      <li>Maç ve yayın sponsorluğu</li>
       <li>Takım sahipliği ve slot başvurusu</li>
     </ul>
   </div>
