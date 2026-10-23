@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>PCL Türkiye</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="PCL Türkiye: takım sahipli, slot sistemli padel ligi. Sponsorlar için lig yapısı ve modeli.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400..700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: court-blue hero band drawn like a padel court from above, then a single
+   reading column of sections on cool paper; diagrams use the court's own geometry. */
+:root {
+  --paper: #F2F5F8;
+  --surface: #FFFFFF;
+  --ink: #0B1D31;
+  --muted: #4F6175;
+  --line: #D3DCE6;
+  --court: #123F7A;
+  --court-deep: #0B2C58;
+  --on-court: #F4F8FC;
+  --on-court-muted: #B9CBE2;
+  --court-line: rgba(244, 248, 252, 0.88);
+  --court-ink: #123F7A;
+  --red: #D9302A;
+  --red-soft: rgba(217, 48, 42, 0.1);
+
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  --step-4: clamp(2.5rem, 1.6rem + 4.4vw, 4.75rem);
+  --wrap: 68rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
+    --court: #0F3A70; --court-deep: #0A2A52; --on-court: #F4F8FC; --on-court-muted: #A9BED8;
+    --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
+  --court: #0F3A70; --court-deep: #0A2A52; --on-court: #F4F8FC; --on-court-muted: #A9BED8;
+  --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) {
+  .wrap {
+    padding-left: max(32px, env(safe-area-inset-left, 0px));
+    padding-right: max(32px, env(safe-area-inset-right, 0px));
+  }
+}
+h1, h2, h3 {
+  font-family: var(--f-display);
+  font-stretch: 72%;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); font-weight: 700; }
+p { margin: 0; max-width: 65ch; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.lede { font-size: var(--step-1); color: var(--muted); }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--court);
+  color: var(--on-court);
+}
+.hero .wrap { padding-block: 1.25rem 3.5rem; }
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+}
+.mark {
+  font-family: var(--f-display);
+  font-stretch: 112%;
+  font-weight: 900;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+}
+.mark span { color: var(--on-court-muted); font-weight: 500; }
+.topbar nav { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: var(--step--1); }
+.topbar nav a { text-decoration: none; color: var(--on-court-muted); }
+.topbar nav a:hover { color: var(--on-court); }
+.hero-grid {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
+.hero-grid > * { min-width: 0; }
+.hero h1 { font-size: var(--step-4); }
+.hero h1 em { font-style: normal; color: var(--on-court-muted); }
+.hero .eyebrow { color: var(--on-court-muted); margin-bottom: 1rem; display: block; }
+.hero .lede { color: var(--on-court-muted); margin-top: 1.25rem; }
+.court-fig { margin: 0; }
+.court-fig svg { width: 100%; height: auto; display: block; }
+.court-fig figcaption {
+  font-family: var(--f-mono);
+  font-size: var(--step--1);
+  color: var(--on-court-muted);
+  margin-top: 0.75rem;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--court-line);
+  border: 1px solid var(--court-line);
+  margin-top: 3rem;
+}
+@media (min-width: 720px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.fact { background: var(--court); padding: 1rem 1.125rem 1.125rem; }
+.fact b {
+  display: block;
+  font-family: var(--f-display);
+  font-stretch: 72%;
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.fact span { font-size: var(--step--1); color: var(--on-court-muted); }
+
+/* ---------- Sections ---------- */
+section.block { padding-block: 4.5rem 0; }
+section.block:last-of-type { padding-bottom: 4.5rem; }
+.block-head { display: grid; gap: 0.75rem; margin-bottom: 2rem; }
+.split { display: grid; gap: 2rem; }
+@media (min-width: 860px) { .split { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+.split > * { min-width: 0; }
+
+/* Comparison table */
+.table-scroll { overflow-x: auto; border-top: 2px solid var(--ink); }
+table { border-collapse: collapse; width: 100%; min-width: 34rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.9rem 1rem 0.9rem 0; border-bottom: 1px solid var(--line); }
+th { font-family: var(--f-mono); font-size: var(--step--1); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td:first-child { font-weight: 600; width: 22%; }
+td:nth-child(2) { color: var(--muted); width: 33%; }
+
+/* Lineup */
+.lineup { display: grid; gap: 0.625rem; }
+.row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1rem;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.875rem 1rem;
+}
+@media (max-width: 460px) { .row { grid-template-columns: 1fr; gap: 0.5rem; } }
+.row-name { font-family: var(--f-display); font-stretch: 80%; font-weight: 800; font-size: 1.25rem; line-height: 1.1; }
+.row-name small { display: block; font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.125rem; }
+.pair { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border: 1px solid var(--line);
+  padding: 0.3rem 0.65rem;
+  font-size: var(--step--1);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--court-ink); flex: none; }
+.dot.w { background: transparent; border: 2px solid var(--court-ink); }
+.chip.flex-slot { border-style: dashed; color: var(--muted); }
+.vs { font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); }
+.rules { display: grid; gap: 1rem; margin-top: 1.5rem; padding: 0; list-style: none; }
+.rules li { display: grid; grid-template-columns: 2.75rem 1fr; gap: 0.75rem; align-items: baseline; }
+.rules b {
+  font-family: var(--f-display);
+  font-stretch: 72%;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+}
+.legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: var(--step--1); color: var(--muted); margin-top: 0.75rem; }
+.legend span { display: inline-flex; gap: 0.375rem; align-items: center; }
+
+/* Match order */
+.order { display: grid; gap: 0; border-top: 2px solid var(--ink); counter-reset: m; }
+.order li { list-style: none; display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.order li::before {
+  counter-increment: m;
+  content: counter(m);
+  font-family: var(--f-display);
+  font-stretch: 72%;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--court-ink);
+}
+.order { padding: 0; margin: 0; }
+.order strong { display: block; }
+.order span { color: var(--muted); font-size: 0.9375rem; }
+.points { width: 100%; min-width: 0; margin-top: 1.25rem; }
+.points td, .points th { padding-right: 0.5rem; }
+.points td:first-child { width: auto; font-family: var(--f-mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.points td:nth-child(2) { width: auto; color: var(--ink); }
+.points td:last-child { text-align: right; font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 1.5rem; line-height: 1; }
+.points th:last-child { text-align: right; }
+
+/* Ownership */
+.ledger { display: grid; gap: 1.5rem; }
+@media (min-width: 720px) { .ledger { grid-template-columns: 1fr 1fr; } }
+.ledger > div { min-width: 0; border-top: 2px solid var(--ink); padding-top: 1rem; }
+.ledger h3 { font-size: 1.375rem; margin-bottom: 0.75rem; }
+.ledger ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.75rem; }
+.ledger li { padding-left: 1rem; position: relative; }
+.ledger li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.4rem; height: 1px; background: var(--muted); }
+.ledger li strong { display: block; }
+.ledger li span { color: var(--muted); font-size: 0.9375rem; }
+
+/* Money flow */
+.flow {
+  display: grid;
+  gap: 1rem;
+  align-items: stretch;
+}
+@media (min-width: 900px) { .flow { grid-template-columns: 1fr auto 0.8fr auto 1fr; } }
+.flow > * { min-width: 0; }
+.flow-col { display: grid; gap: 0.5rem; align-content: start; }
+.flow-col h4 { margin: 0 0 0.25rem; font-family: var(--f-mono); font-size: var(--step--1); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.flow-item { background: var(--surface); border: 1px solid var(--line); padding: 0.75rem 0.9rem; }
+.flow-item strong { display: block; font-size: 0.9375rem; }
+.flow-item span { display: block; font-size: var(--step--1); color: var(--muted); line-height: 1.45; }
+.flow-item.league { border-color: var(--court-ink); box-shadow: inset 3px 0 0 var(--court-ink); }
+.flow-team {
+  background: var(--court);
+  color: var(--on-court);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  gap: 0.25rem;
+}
+.flow-team strong { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 2rem; line-height: 1; }
+.flow-team span { font-size: var(--step--1); color: var(--on-court-muted); }
+.arrow { display: grid; place-items: center; color: var(--muted); font-family: var(--f-mono); }
+.arrow::before { content: "↓"; font-size: 1.25rem; }
+@media (min-width: 900px) { .arrow::before { content: "→"; } }
+
+/* Support cards */
+.support { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+@media (min-width: 720px) { .support { grid-template-columns: 1fr 1fr; } }
+.support > div { min-width: 0; }
+.support h3 { font-size: 1.375rem; margin-bottom: 0.25rem; }
+.support .tag { font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.support dl { margin: 1rem 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.support dl > div { display: grid; grid-template-columns: 1fr; padding: 0.75rem 0; border-bottom: 1px solid var(--line); gap: 0.125rem; }
+.support dt { font-weight: 600; }
+.support dd { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+.note { margin-top: 1.5rem; font-size: 0.9375rem; color: var(--muted); padding: 0.875rem 1rem; background: var(--red-soft); }
+.note strong { color: var(--ink); }
+
+/* Sponsor assets */
+.assets { display: grid; gap: 0; border-top: 2px solid var(--ink); }
+@media (min-width: 720px) { .assets { grid-template-columns: 1fr 1fr; column-gap: 2.5rem; } }
+.asset { padding: 1.125rem 0; border-bottom: 1px solid var(--line); display: grid; gap: 0.25rem; min-width: 0; }
+.asset .tier { font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); }
+.asset strong { font-size: 1.0625rem; }
+.asset span { color: var(--muted); font-size: 0.9375rem; }
+
+/* Season */
+.season { display: grid; gap: 0; padding: 0; margin: 0; list-style: none; }
+@media (min-width: 860px) { .season { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.season li { padding: 1.25rem 1.25rem 1.25rem 0; border-top: 2px solid var(--court-ink); display: grid; gap: 0.375rem; align-content: start; min-width: 0; }
+@media (max-width: 859px) { .season li { padding-right: 0; } }
+.season .phase { font-family: var(--f-mono); font-size: var(--step--1); color: var(--court-ink); }
+.season strong { font-family: var(--f-display); font-stretch: 80%; font-weight: 800; font-size: 1.375rem; line-height: 1.1; }
+.season span { color: var(--muted); font-size: 0.9375rem; }
+
+/* CTA */
+.cta { background: var(--court-deep); color: var(--on-court); margin-top: 4.5rem; }
+.cta .wrap { padding-block: 3.5rem; display: grid; gap: 1.5rem; }
+@media (min-width: 860px) { .cta .wrap { grid-template-columns: 1.4fr 1fr; align-items: end; } }
+.cta .wrap > * { min-width: 0; }
+.cta p { color: var(--on-court-muted); margin-top: 1rem; }
+.cta ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; font-size: 0.9375rem; }
+.cta li { padding: 0.75rem 1rem; border: 1px solid rgba(244, 248, 252, 0.25); }
+footer { color: var(--muted); font-size: var(--step--1); }
+footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .court-fig .ball { animation: rally 6s ease-in-out infinite; }
+  @keyframes rally {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(9.2px, -2.2px); }
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="mark">PCL <span>Türkiye</span></div>
+      <nav aria-label="Bölümler">
+        <a href="#model">Model</a>
+        <a href="#takim">Takım yapısı</a>
+        <a href="#format">Format</a>
+        <a href="#sahiplik">Sahiplik</a>
+        <a href="#destek">Lig desteği</a>
+        <a href="#sponsorluk">Sponsorluk</a>
+      </nav>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Padel Şampiyonluk Ligi</span>
+        <h1>Takımların sahibi var. <em>Slotlar kalıcı.</em> Lig takımlarına yatırım yapıyor.</h1>
+        <p class="lede">PCL Türkiye, esporun büyük liglerinde kendini kanıtlamış franchise modelini padele taşıyor. Sabit slotlu takımlar, takımlarına yatırım yapan sahipler ve takımları aylık ve yıllık destekle büyüten bir lig.</p>
+      </div>
+
+      <figure class="court-fig">
+        <svg viewBox="-1.4 -1.8 22.8 13.8" role="img" aria-label="Üstten padel kortu: 20 metreye 10 metre, ortada file, fileye 6,95 metre mesafede servis çizgileri, iki tarafta ikişer oyuncu.">
+          <rect x="0" y="0" width="20" height="10" fill="var(--court-deep)" stroke="var(--court-line)" stroke-width="0.12"/>
+          <line x1="3.05" y1="0" x2="3.05" y2="10" stroke="var(--court-line)" stroke-width="0.08"/>
+          <line x1="16.95" y1="0" x2="16.95" y2="10" stroke="var(--court-line)" stroke-width="0.08"/>
+          <line x1="3.05" y1="5" x2="16.95" y2="5" stroke="var(--court-line)" stroke-width="0.08"/>
+          <line x1="10" y1="-0.35" x2="10" y2="10.35" stroke="var(--on-court)" stroke-width="0.22"/>
+          <circle cx="5.2" cy="2.6" r="0.42" fill="var(--on-court)"/>
+          <circle cx="1.9" cy="7.4" r="0.42" fill="var(--on-court)"/>
+          <circle cx="14.8" cy="2.4" r="0.42" fill="none" stroke="var(--on-court)" stroke-width="0.14"/>
+          <circle cx="17.9" cy="7.6" r="0.42" fill="none" stroke="var(--on-court)" stroke-width="0.14"/>
+          <circle class="ball" cx="6.4" cy="4.1" r="0.2" fill="var(--red)"/>
+          <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="0.55" fill="var(--on-court-muted)">
+            <text x="10" y="-0.75" text-anchor="middle">20 m</text>
+            <text x="-0.55" y="5" text-anchor="middle" transform="rotate(-90 -0.55 5)">10 m</text>
+            <text x="6.525" y="10.95" text-anchor="middle">6,95 m</text>
+            <text x="13.475" y="10.95" text-anchor="middle">6,95 m</text>
+            <text x="20.6" y="5" text-anchor="middle" transform="rotate(90 20.6 5)">FİLE ORTADA</text>
+          </g>
+        </svg>
+        <figcaption>Bir karşılaşma = bu kortta 3 maç: Kadınlar, Open, Mix.</figcaption>
+      </figure>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>8</b><span>kurucu takım, sabit slot</span></div>
+      <div class="fact"><b>3</b><span>kategori: Kadınlar, Mix, Open</span></div>
+      <div class="fact"><b>6</b><span>oyuncu her karşılaşmada sahada</span></div>
+      <div class="fact"><b>2</b><span>yabancı oyuncu sınırı</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="model">
+    <div class="wrap">
+      <div class="split">
+        <div class="block-head">
+          <span class="eyebrow">Model</span>
+          <h2>Espor liglerinde işleyen yapı, padel kortunda</h2>
+        </div>
+        <div style="display:grid;gap:1rem">
+          <p>Dünyada ve Türkiye'de LoL, CS ve Valorant ligleri takımları kalıcı slot sahibi ortaklara dönüştürdü. Lig takımlara aylık ve yıllık destek verdi. Takımlar bu destekle gaming house kurdu, oyuncu maaşı ödedi ve dijital içerik üretti.</p>
+          <p>Bunun sonucu, her sezon yeni takımlar arasında sıfırdan başlayan turnuvalar yerine yıllarca aynı markalarla büyüyen ve taraftarı olan bir lig oldu. Türkiye'de padel hızla büyüyor ve şampiyonluk ligi mantığı bu yapıya birebir oturuyor.</p>
+        </div>
+      </div>
+
+      <div class="table-scroll" style="margin-top:2.5rem">
+        <table>
+          <thead>
+            <tr><th scope="col">Unsur</th><th scope="col">Espor ligi</th><th scope="col">PCL Türkiye</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lig hakkı</td><td>Partner takım slotu</td><td>Takım sahibine ait, lig onayıyla devredilebilir franchise slotu</td></tr>
+            <tr><td>Antrenman üssü</td><td>Gaming house</td><td>Padel House: haftalık sabit kort saati, antrenör, kondisyoner, fizyoterapist</td></tr>
+            <tr><td>Kadro</td><td>Ana kadro, yedekler, ithal oyuncu sınırı</td><td>Kadınlar, Mix ve Open çiftleri, yedekler, en fazla 2 yabancı</td></tr>
+            <tr><td>Lig desteği</td><td>Aylık destek ve gelir payı</td><td>Aylık destek ve yıllık gelir paylaşımı, hedeflere bağlı</td></tr>
+            <tr><td>Yayın ve içerik</td><td>Stüdyo maçları, yayın, sosyal medya</td><td>Merkezi etkinlik haftaları, cam kort yayını, takım içerik kotası</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="takim">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="block-head">
+            <span class="eyebrow">Takım yapısı</span>
+            <h2>Her takım üç çift çıkarır</h2>
+            <p class="lede">Kadınlar, Mix ve Open. Bir karşılaşmada her oyuncu tek maça çıkar. Bu yüzden takımlar derin kadro kurar ve sahaya en az altı farklı oyuncu çıkar.</p>
+          </div>
+          <ul class="rules">
+            <li><b>8</b><span>kişilik kadro: 6 as oyuncu ve 2 yedek.</span></li>
+            <li><b>2</b><span>yabancı oyuncu, kadrodaki üst sınır.</span></li>
+            <li><b>1</b><span>yabancı, bir çiftteki üst sınır. Sahadaki her çiftte en az bir Türk oyuncu oynar.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="lineup" aria-label="Örnek karşılaşma kadrosu">
+            <div class="row">
+              <div class="row-name">Kadınlar<small>2 kadın</small></div>
+              <div class="pair"><span class="chip"><i class="dot w"></i>Kadın</span><span class="vs">+</span><span class="chip"><i class="dot w"></i>Kadın</span></div>
+            </div>
+            <div class="row">
+              <div class="row-name">Mix<small>1 kadın · 1 erkek</small></div>
+              <div class="pair"><span class="chip"><i class="dot w"></i>Kadın</span><span class="vs">+</span><span class="chip"><i class="dot"></i>Erkek</span></div>
+            </div>
+            <div class="row">
+              <div class="row-name">Open<small>Her oyuncuya açık</small></div>
+              <div class="pair"><span class="chip"><i class="dot"></i>Erkek</span><span class="vs">+</span><span class="chip"><i class="dot"></i>Erkek</span></div>
+            </div>
+            <div class="row">
+              <div class="row-name">Yedek<small>2 oyuncu</small></div>
+              <div class="pair"><span class="chip flex-slot">Kadın ya da erkek</span><span class="chip flex-slot">Kadın ya da erkek</span></div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><i class="dot w"></i>Kadın oyuncu</span>
+            <span><i class="dot"></i>Erkek oyuncu</span>
+            <span>Open kategorisi pratikte iki erkek oyuncuyla oynanır.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="format">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow">Karşılaşma formatı</span>
+        <h2>Bir karşılaşma, üç maç, her maç puan getirir</h2>
+      </div>
+      <div class="split">
+        <div>
+          <ol class="order">
+            <li><div><strong>Kadınlar</strong><span>Karşılaşmayı açan maç.</span></div></li>
+            <li><div><strong>Open</strong><span>Ortadaki maç.</span></div></li>
+            <li><div><strong>Mix</strong><span>Kapanış maçı. İki kategorinin oyuncuları aynı kortta.</span></div></li>
+          </ol>
+          <p style="margin-top:1.25rem;color:var(--muted)">Karşılaşma 2-0 olsa da üçüncü maç oynanır. İki maçı alan takım karşılaşmayı kazanır, ama puan tablosu skorun tamamını sayar.</p>
+        </div>
+        <div>
+          <div class="table-scroll">
+            <table class="points">
+              <thead><tr><th scope="col">Skor</th><th scope="col">Sonuç</th><th scope="col">Puan</th></tr></thead>
+              <tbody>
+                <tr><td>3–0</td><td>Galibiyet</td><td>3</td></tr>
+                <tr><td>2–1</td><td>Galibiyet</td><td>2</td></tr>
+                <tr><td>1–2</td><td>Mağlubiyet</td><td>1</td></tr>
+                <tr><td>0–3</td><td>Mağlubiyet</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:1rem;color:var(--muted);font-size:0.9375rem">Bu sistemde kaybedilmiş bir karşılaşmada alınan tek maç bile tabloyu değiştirir. Yayın son maça kadar canlı kalır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sahiplik">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow">Takım sahipliği</span>
+        <h2>Takım sahibi yatırım yapar, karşılığında kalıcı bir varlık edinir</h2>
+        <p class="lede">Slot bir sezonluk katılım hakkı değil, sahibinin değerini büyüttüğü bir varlık. Lig ilk sezonlarda kapalı yapıdadır, küme düşme yoktur. Yükümlülüğünü yerine getirmeyen takımın slotu geri alınabilir.</p>
+      </div>
+      <div class="ledger">
+        <div>
+          <h3>Takım sahibinin hakları</h3>
+          <ul>
+            <li><strong>Kalıcı slot</strong><span>Lig onayıyla satılabilir ve devredilebilir.</span></li>
+            <li><strong>Gelir paylaşımı</strong><span>Lig sponsorluk ve yayın gelirlerinden yıllık pay.</span></li>
+            <li><strong>Kendi ticari hakları</strong><span>Forma sponsoru, takım sponsorları, ürün satışı.</span></li>
+            <li><strong>Marka ve şehir temsili</strong><span>Kulüp, şirket ya da şehir kimliğiyle lige girme.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Takım sahibinin taahhütleri</h3>
+          <ul>
+            <li><strong>Çok sezonluk taahhüt</strong><span>İlk dönem için en az 3 sezon.</span></li>
+            <li><strong>Oyuncu standardı</strong><span>Lig tarafından belirlenen asgari maaş ve standart sözleşme.</span></li>
+            <li><strong>Padel House</strong><span>Lig standardında antrenman tesisi ve teknik ekip.</span></li>
+            <li><strong>İçerik ve altyapı</strong><span>Aylık içerik kotası, kadın oyuncu ve altyapı programı.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="destek">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow">Lig desteği</span>
+        <h2>Para nereden gelir, nereye gider</h2>
+        <p class="lede">Takımı sahibinin yatırımı, lig desteği ve takımın kendi sponsorları birlikte finanse eder. Lig desteğinin büyük bölümü sabit değildir, hedeflere bağlıdır.</p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-col">
+          <h4>Takıma gelen</h4>
+          <div class="flow-item"><strong>Takım sahibi</strong><span>Kuruluş ve işletme yatırımı</span></div>
+          <div class="flow-item league"><strong>PCL aylık destek</strong><span>Oyuncu, Padel House, içerik</span></div>
+          <div class="flow-item league"><strong>PCL yıllık pay</strong><span>Gelir paylaşımı ve sıralama bonusu</span></div>
+          <div class="flow-item"><strong>Takım sponsorları</strong><span>Forma, isim, ürün</span></div>
+        </div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="flow-team"><strong>Takım</strong><span>8 kişilik kadro ve teknik ekip</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="flow-col">
+          <h4>Takımın harcadığı</h4>
+          <div class="flow-item"><strong>Oyuncu maaşları</strong><span>Türk ve yabancı oyuncular</span></div>
+          <div class="flow-item"><strong>Padel House</strong><span>Kort saati, antrenör, kondisyon, fizyo</span></div>
+          <div class="flow-item"><strong>Dijital içerik</strong><span>Video, sosyal medya, belgesel serisi</span></div>
+          <div class="flow-item"><strong>Altyapı</strong><span>Genç ve kadın oyuncu programları</span></div>
+        </div>
+      </div>
+
+      <div class="support">
+        <div>
+          <span class="tag">Her ay</span>
+          <h3>Aylık destek</h3>
+          <dl>
+            <div><dt>Oyuncu maaş katkısı</dt><dd>Asgari maaşın bir bölümünü lig karşılar.</dd></div>
+            <div><dt>Padel House</dt><dd>Lig partner tesislerinde her takıma haftalık sabit kort saati.</dd></div>
+            <div><dt>İçerik bütçesi</dt><dd>Aylık içerik kotası tuttuğunda ödenir.</dd></div>
+          </dl>
+        </div>
+        <div>
+          <span class="tag">Sezon sonu</span>
+          <h3>Yıllık destek</h3>
+          <dl>
+            <div><dt>Gelir paylaşım havuzu</dt><dd>Lig sponsorluk ve yayın gelirinin bir payı: bir kısmı eşit, bir kısmı etkileşime göre.</dd></div>
+            <div><dt>Sıralama bonusu</dt><dd>Normal sezon ve playoff sonucuna göre.</dd></div>
+            <div><dt>Altyapı primi</dt><dd>Kadın ve genç oyuncu programını yürüten takımlara.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <p class="note"><strong>Neden hedefe bağlı?</strong> Espor liglerinde yüksek ve sabit destekler zamanla sürdürülemez hale geldi. PCL desteği ligin gelirine ve takımın katkısına bağlar. Böylece lig büyüdükçe takımlara giden pay da büyür.</p>
+    </div>
+  </section>
+
+  <section class="block" id="sponsorluk">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow">Sponsorluk</span>
+        <h2>Markanız kortun her yerinde</h2>
+        <p class="lede">Padel camla çevrili bir kortta oynanır ve yayında kamera markadan hiç ayrılmaz. PCL sponsorluğu lig, kategori ve takım seviyesinde kurgulanır.</p>
+      </div>
+      <div class="assets">
+        <div class="asset"><span class="tier">Lig</span><strong>İsim hakkı</strong><span>Ligin adında marka: "[Marka] PCL Türkiye".</span></div>
+        <div class="asset"><span class="tier">Lig</span><strong>Cam ve file markalama</strong><span>Tüm karşılaşmalarda kortun yayına giren yüzeyleri.</span></div>
+        <div class="asset"><span class="tier">Kategori</span><strong>Kadınlar maçı sponsoru</strong><span>Kadın padelinin büyümesiyle anılan marka.</span></div>
+        <div class="asset"><span class="tier">Kategori</span><strong>Mix maçı sponsoru</strong><span>Her karşılaşmanın kapanış maçı.</span></div>
+        <div class="asset"><span class="tier">Yayın</span><strong>Altın sayı anı</strong><span>Oyunun düğümlendiği deuce sayısında ekran grafiği ve tekrar.</span></div>
+        <div class="asset"><span class="tier">Yayın</span><strong>Skor tabelası ve istatistikler</strong><span>Yayın grafikleri ve maç sonu istatistik kartları.</span></div>
+        <div class="asset"><span class="tier">Dijital</span><strong>Belgesel ve içerik serileri</strong><span>Padel House'tan sezon boyu kamera arkası.</span></div>
+        <div class="asset"><span class="tier">Etkinlik</span><strong>Etkinlik haftası alanı</strong><span>Merkezi etkinliklerde deneyim ve stant alanı.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sezon">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow">Sezon akışı</span>
+        <h2>Bir sezon dört aşamada ilerler</h2>
+      </div>
+      <ol class="season">
+        <li><span class="phase">Aşama 1</span><strong>Kadro ve transfer</strong><span>Takımlar kadrolarını kurar, yabancı oyuncular açıklanır.</span></li>
+        <li><span class="phase">Aşama 2</span><strong>Normal sezon</strong><span>Çift devreli lig: 8 takımla 14 hafta, her hafta 4 karşılaşma.</span></li>
+        <li><span class="phase">Aşama 3</span><strong>Playoff</strong><span>İlk 4 takım eleme usulüyle oynar.</span></li>
+        <li><span class="phase">Aşama 4</span><strong>Final hafta sonu</strong><span>Şampiyon tek bir büyük etkinlikte belirlenir.</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<section class="cta" aria-labelledby="cta-h">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" style="color:var(--on-court-muted)">Kurucu sezon</span>
+      <h2 id="cta-h" style="margin-top:0.75rem">İlk sezonun kurucu ortağı olun</h2>
+      <p>Kurucu sponsorlar ve takım sahipleriyle görüşmeler sürüyor. Sponsorluk dosyası ve detaylı lig sunumu için bizimle iletişime geçin.</p>
+    </div>
+    <ul>
+      <li>Lig sponsorluğu ve isim hakkı</li>
+      <li>Kategori ve yayın sponsorluğu</li>
+      <li>Takım sahipliği ve slot başvurusu</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>PCL Türkiye · Padel Şampiyonluk Ligi</span>
+    <span>Lig yapısı taslaktır, kurucu sezon öncesi kesinleşir.</span>
+  </div>
+</footer>
+</body>
+</html>
