@@ -27,6 +27,7 @@
   --court-ink: #123F7A;
   --red: #D9302A;
   --red-soft: rgba(217, 48, 42, 0.1);
+  --blue-soft: rgba(18, 63, 122, 0.1);
 
   --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --f-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
@@ -44,14 +45,14 @@
   :root:not([data-theme="light"]) {
     --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
     --court: #0F3A70; --court-deep: #0A2A52; --on-court: #F4F8FC; --on-court-muted: #A9BED8;
-    --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14);
+    --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --blue-soft: rgba(127, 168, 222, 0.16);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
   --court: #0F3A70; --court-deep: #0A2A52; --on-court: #F4F8FC; --on-court-muted: #A9BED8;
-  --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14);
+  --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --blue-soft: rgba(127, 168, 222, 0.16);
   color-scheme: dark;
 }
 
@@ -267,18 +268,23 @@ td:nth-child(2) { color: var(--muted); width: 33%; }
 .arrow::before { content: "↓"; font-size: 1.25rem; }
 @media (min-width: 900px) { .arrow::before { content: "→"; } }
 
-/* Support cards */
-.support { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
-@media (min-width: 720px) { .support { grid-template-columns: 1fr 1fr; } }
-.support > div { min-width: 0; }
-.support h3 { font-size: 1.375rem; margin-bottom: 0.25rem; }
-.support .tag { font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-.support dl { margin: 1rem 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
-.support dl > div { display: grid; grid-template-columns: 1fr; padding: 0.75rem 0; border-bottom: 1px solid var(--line); gap: 0.125rem; }
-.support dt { font-weight: 600; }
-.support dd { margin: 0; color: var(--muted); font-size: 0.9375rem; }
 .note { margin-top: 1.5rem; font-size: 0.9375rem; color: var(--muted); padding: 0.875rem 1rem; background: var(--red-soft); }
 .note strong { color: var(--ink); }
+
+/* Grant */
+.grant { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.5rem; }
+@media (min-width: 860px) { .grant { grid-template-columns: 1.1fr 1fr; } }
+.grant > * { min-width: 0; }
+.grant-main { background: var(--court); color: var(--on-court); padding: 1.5rem; display: grid; gap: 0.375rem; align-content: center; }
+.grant-main .tag { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-court-muted); }
+.grant-main b { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: var(--step-4); line-height: 1; font-variant-numeric: tabular-nums; }
+.grant-main > span:last-child { color: var(--on-court-muted); }
+.grant-facts { margin: 0; background: var(--surface); display: grid; }
+.grant-facts > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); }
+.grant-facts > div:last-child { border-bottom: 0; }
+.grant-facts dt { color: var(--muted); font-size: 0.9375rem; }
+.grant-facts dd { margin: 0; font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; text-align: right; }
+.grant-facts dd.txt { font-family: var(--f-body); font-stretch: 100%; font-weight: 500; font-size: 0.9375rem; max-width: 18rem; }
 
 /* Sponsor assets */
 .assets { display: grid; gap: 0; border-top: 2px solid var(--ink); }
@@ -288,12 +294,48 @@ td:nth-child(2) { color: var(--muted); width: 33%; }
 .asset strong { font-size: 1.0625rem; }
 .asset span { color: var(--muted); font-size: 0.9375rem; }
 
+/* Kit mockups */
+.kits { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); align-items: start; }
+.kit-card { margin: 0; background: var(--surface); border: 1px solid var(--line); padding: 1rem; display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+.kit-card svg { width: 100%; height: auto; display: block; max-height: 15rem; }
+.kit-card figcaption { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.kit-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (min-width: 900px) { .kit-pair { grid-template-columns: 1fr; } }
+.kit { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+.kit-line { fill: none; stroke: var(--ink); stroke-width: 1.1; }
+.z-team { fill: var(--red-soft); stroke: var(--red); stroke-width: 1.2; stroke-dasharray: 3 2; }
+.z-league { fill: var(--blue-soft); stroke: var(--court-ink); stroke-width: 1.2; stroke-dasharray: 3 2; }
+.z-num { font-family: var(--f-mono); font-size: 9px; font-weight: 500; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
+.kit-name { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 19px; fill: var(--ink); text-anchor: middle; letter-spacing: 0.04em; }
+.kit-key { display: grid; gap: 0; margin: 1.5rem 0 0; padding: 0; list-style: none; border-top: 2px solid var(--ink); }
+@media (min-width: 720px) { .kit-key { grid-template-columns: 1fr 1fr; column-gap: 2.5rem; } }
+.kit-key li { display: grid; grid-template-columns: 1.75rem 1fr auto; gap: 0.75rem; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.kit-key .n { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
+.kit-key strong { display: block; font-size: 0.9375rem; }
+.kit-key span.ex { display: block; font-size: var(--step--1); color: var(--muted); }
+.owner { font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.5rem; border: 1px dashed currentColor; white-space: nowrap; }
+.owner.t { color: var(--red); background: var(--red-soft); }
+.owner.l { color: var(--court-ink); background: var(--blue-soft); }
+.owner.p { color: var(--muted); }
+.kit-legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: var(--step--1); color: var(--muted); margin-top: 0.75rem; }
+.kit-legend span { display: inline-flex; gap: 0.5rem; align-items: center; }
+.sw { width: 1.25rem; height: 0.75rem; border: 1px dashed; display: inline-block; }
+.sw.t { border-color: var(--red); background: var(--red-soft); }
+.sw.l { border-color: var(--court-ink); background: var(--blue-soft); }
+.callouts { display: grid; gap: 1rem; margin-top: 1.5rem; }
+@media (min-width: 720px) { .callouts { grid-template-columns: 1fr 1fr; } }
+.callouts .note { margin-top: 0; }
+.adapt td:first-child { width: 40%; font-weight: 400; color: var(--muted); }
+.adapt td:nth-child(2) { width: auto; color: var(--ink); }
+.adapt { min-width: 0; }
+
 /* Season */
 .season { display: grid; gap: 0; padding: 0; margin: 0; list-style: none; }
 @media (min-width: 860px) { .season { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .season li { padding: 1.25rem 1.25rem 1.25rem 0; border-top: 2px solid var(--court-ink); display: grid; gap: 0.375rem; align-content: start; min-width: 0; }
 @media (max-width: 859px) { .season li { padding-right: 0; } }
 .season .phase { font-family: var(--f-mono); font-size: var(--step--1); color: var(--court-ink); }
+@media (min-width: 860px) { .season.steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .season strong { font-family: var(--f-display); font-stretch: 80%; font-weight: 800; font-size: 1.375rem; line-height: 1.1; }
 .season span { color: var(--muted); font-size: 0.9375rem; }
 
@@ -330,6 +372,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <a href="#sahiplik">Sahiplik</a>
         <a href="#destek">Lig desteği</a>
         <a href="#sponsorluk">Sponsorluk</a>
+        <a href="#forma">Forma</a>
       </nav>
     </div>
 
@@ -393,10 +436,10 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
             <tr><th scope="col">Unsur</th><th scope="col">Espor ligi</th><th scope="col">PCL Türkiye</th></tr>
           </thead>
           <tbody>
-            <tr><td>Lig hakkı</td><td>Partner takım slotu</td><td>Takım sahibine ait, lig onayıyla devredilebilir franchise slotu</td></tr>
+            <tr><td>Lig hakkı</td><td>Partner takım slotu</td><td>Takım sahibine ait franchise slotu, organizasyon onayıyla devredilir</td></tr>
             <tr><td>Antrenman üssü</td><td>Gaming house</td><td>Padel House: haftalık sabit kort saati, antrenör, kondisyoner, fizyoterapist</td></tr>
             <tr><td>Kadro</td><td>Ana kadro, yedekler, ithal oyuncu sınırı</td><td>6 kişilik takım, en az 3 kadın oyuncu, en fazla 2 yabancı</td></tr>
-            <tr><td>Lig desteği</td><td>Aylık destek ve gelir payı</td><td>Aylık destek ve yıllık gelir paylaşımı, hedeflere bağlı</td></tr>
+            <tr><td>Lig desteği</td><td>Aylık destek ve gelir payı</td><td>Takım başına yıllık 1.500.000 TL, 3 sezon boyunca</td></tr>
             <tr><td>Yayın ve içerik</td><td>Stüdyo maçları, yayın, sosyal medya</td><td>Merkezi etkinlik haftaları, cam kort yayını, takım içerik kotası</td></tr>
           </tbody>
         </table>
@@ -475,13 +518,13 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
       <div class="block-head">
         <span class="eyebrow">Takım sahipliği</span>
         <h2>Takım sahibi yatırım yapar, karşılığında kalıcı bir varlık edinir</h2>
-        <p class="lede">Slot bir sezonluk katılım hakkı değil, sahibinin değerini büyüttüğü bir varlık. Lig ilk sezonlarda kapalı yapıdadır, küme düşme yoktur. Yükümlülüğünü yerine getirmeyen takımın slotu geri alınabilir.</p>
+        <p class="lede">Slot bir sezonluk katılım hakkı değil, sahibinin değerini büyüttüğü bir varlık. Lig ilk sezonlarda kapalı yapıdadır, küme düşme yoktur. Slotun satışı ve devri her zaman organizasyonun onayına bağlıdır.</p>
       </div>
       <div class="ledger">
         <div>
           <h3>Takım sahibinin hakları</h3>
           <ul>
-            <li><strong>Kalıcı slot</strong><span>Lig onayıyla satılabilir ve devredilebilir.</span></li>
+            <li><strong>Kalıcı slot</strong><span>Satılabilir ve devredilebilir. Devir için organizasyon onayı şarttır.</span></li>
             <li><strong>Gelir paylaşımı</strong><span>Lig sponsorluk ve yayın gelirlerinden yıllık pay.</span></li>
             <li><strong>Kendi ticari hakları</strong><span>Forma sponsoru, takım sponsorları, ürün satışı.</span></li>
             <li><strong>Marka ve şehir temsili</strong><span>Kulüp, şirket ya da şehir kimliğiyle lige girme.</span></li>
@@ -497,6 +540,16 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
           </ul>
         </div>
       </div>
+
+      <div class="block-head" style="margin-top:3rem;margin-bottom:1.25rem">
+        <h3>Slot devri: onay her zaman organizasyonda</h3>
+        <p style="color:var(--muted)">Takım sahibi takımını başka birine satabilir, ama organizasyonun onayı olmadan satış yapamaz. Böylece ligdeki her takım sahibi ligin standardını taşır.</p>
+      </div>
+      <ol class="season steps">
+        <li><span class="phase">Adım 1</span><strong>Satış talebi</strong><span>Takım sahibi satış niyetini ve alıcıyı organizasyona bildirir.</span></li>
+        <li><span class="phase">Adım 2</span><strong>Alıcının değerlendirilmesi</strong><span>Organizasyon alıcıyı araştırır. Sunumunu, yıllık planlamasını ve lige katacağı değeri inceler.</span></li>
+        <li><span class="phase">Adım 3</span><strong>Karar</strong><span>Organizasyon olumlu ya da olumsuz yanıt verir. Onay olmadan yapılan devir geçersizdir.</span></li>
+      </ol>
     </div>
   </section>
 
@@ -505,15 +558,14 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
       <div class="block-head">
         <span class="eyebrow">Lig desteği</span>
         <h2>Para nereden gelir, nereye gider</h2>
-        <p class="lede">Takımı sahibinin yatırımı, lig desteği ve takımın kendi sponsorları birlikte finanse eder. Lig desteğinin büyük bölümü sabit değildir, hedeflere bağlıdır.</p>
+        <p class="lede">Takımı sahibinin yatırımı, lig desteği ve takımın kendi sponsorları birlikte finanse eder. Lig her takıma ilk 3 sezon boyunca yıllık destek verir.</p>
       </div>
 
       <div class="flow">
         <div class="flow-col">
           <h4>Takıma gelen</h4>
           <div class="flow-item"><strong>Takım sahibi</strong><span>Kuruluş ve işletme yatırımı</span></div>
-          <div class="flow-item league"><strong>PCL aylık destek</strong><span>Oyuncu, Padel House, içerik</span></div>
-          <div class="flow-item league"><strong>PCL yıllık pay</strong><span>Gelir paylaşımı ve sıralama bonusu</span></div>
+          <div class="flow-item league"><strong>PCL desteği</strong><span>Yıllık 1.500.000 TL, 3 sezon boyunca</span></div>
           <div class="flow-item"><strong>Takım sponsorları</strong><span>Forma, isim, ürün</span></div>
         </div>
         <div class="arrow" aria-hidden="true"></div>
@@ -528,27 +580,19 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         </div>
       </div>
 
-      <div class="support">
-        <div>
-          <span class="tag">Her ay</span>
-          <h3>Aylık destek</h3>
-          <dl>
-            <div><dt>Oyuncu maaş katkısı</dt><dd>Asgari maaşın bir bölümünü lig karşılar.</dd></div>
-            <div><dt>Padel House</dt><dd>Lig partner tesislerinde her takıma haftalık sabit kort saati.</dd></div>
-            <div><dt>İçerik bütçesi</dt><dd>Aylık içerik kotası tuttuğunda ödenir.</dd></div>
-          </dl>
+      <div class="grant">
+        <div class="grant-main">
+          <span class="tag">Takım başına lig desteği</span>
+          <b>1.500.000 TL</b>
+          <span>her yıl, 3 sezon boyunca</span>
         </div>
-        <div>
-          <span class="tag">Sezon sonu</span>
-          <h3>Yıllık destek</h3>
-          <dl>
-            <div><dt>Gelir paylaşım havuzu</dt><dd>Lig sponsorluk ve yayın gelirinin bir payı: bir kısmı eşit, bir kısmı etkileşime göre.</dd></div>
-            <div><dt>Sıralama bonusu</dt><dd>Normal sezon ve playoff sonucuna göre.</dd></div>
-            <div><dt>Altyapı primi</dt><dd>Kadın ve genç oyuncu programını yürüten takımlara.</dd></div>
-          </dl>
-        </div>
+        <dl class="grant-facts">
+          <div><dt>3 sezon toplamı</dt><dd>4.500.000 TL</dd></div>
+          <div><dt>Aylık karşılığı</dt><dd>125.000 TL</dd></div>
+          <div><dt>Kullanım alanları</dt><dd class="txt">Oyuncu maaşları, Padel House, dijital içerik, altyapı</dd></div>
+        </dl>
       </div>
-      <p class="note"><strong>Neden hedefe bağlı?</strong> Espor liglerinde yüksek ve sabit destekler zamanla sürdürülemez hale geldi. PCL desteği ligin gelirine ve takımın katkısına bağlar. Böylece lig büyüdükçe takımlara giden pay da büyür.</p>
+      <p class="note"><strong>Neden 3 yıl?</strong> Destek, takım sahibinin ilk 3 sezonluk taahhüdüyle aynı süreyi kapsar. Takım sahibi ilk dönemin bütçesini bu güvenceyle planlar.</p>
     </div>
   </section>
 
@@ -568,6 +612,106 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <div class="asset"><span class="tier">Yayın</span><strong>Skor tabelası ve istatistikler</strong><span>Yayın grafikleri ve maç sonu istatistik kartları.</span></div>
         <div class="asset"><span class="tier">Dijital</span><strong>Belgesel ve içerik serileri</strong><span>Padel House'tan sezon boyu kamera arkası.</span></div>
         <div class="asset"><span class="tier">Etkinlik</span><strong>Etkinlik haftası alanı</strong><span>Merkezi etkinliklerde deneyim ve stant alanı.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="forma">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow">Forma ve logo alanları</span>
+        <h2>Espor formasının sponsor düzeni, padel kortunda</h2>
+        <p class="lede">Espor formaları sponsor yüzeyini en verimli kullanan formalar arasında: göğüste ana sponsor, kollarda ve sırtta ikincil sponsorlar, kolda lig arması. PCL aynı düzeni padel forması, şort, etek ve siperliğe taşıyor.</p>
+      </div>
+
+      <div class="kits">
+        <figure class="kit-card">
+          <svg viewBox="0 0 200 220" role="img" aria-label="Forma önü: göğüste ana sponsor, takım logosu, forma tedarikçisi, ön alt sponsor ve iki kolda logo alanları.">
+            <path class="kit" d="M70,10 Q100,26 130,10 L170,24 L196,70 L166,84 L158,72 L158,212 L42,212 L42,72 L34,84 L4,70 L30,24 Z"/>
+            <path class="kit-line" d="M70,10 Q100,40 130,10"/>
+            <g><rect class="z-team" x="56" y="80" width="88" height="32"/><text class="z-num" x="100.0" y="96.0">1</text></g>
+            <circle class="z-team" cx="132" cy="50" r="11"/><text class="z-num" x="132" y="50">2</text>
+            <g><rect class="z-league" x="54" y="44" width="28" height="12"/><text class="z-num" x="68.0" y="50.0">3</text></g>
+            <g><rect class="z-team" x="70" y="172" width="60" height="14"/><text class="z-num" x="100.0" y="179.0">4</text></g>
+            <g transform="rotate(25 24.0 58.0)"><rect class="z-league" x="15" y="53" width="18" height="10"/><text class="z-num" x="24.0" y="58.0">5</text></g>
+            <g transform="rotate(-25 176.0 58.0)"><rect class="z-team" x="167" y="53" width="18" height="10"/><text class="z-num" x="176.0" y="58.0">6</text></g>
+          </svg>
+          <figcaption>Forma · ön</figcaption>
+        </figure>
+        <figure class="kit-card">
+          <svg viewBox="0 0 200 220" role="img" aria-label="Forma arkası: sırt üst sponsor, oyuncu soyadı ve sırt ana sponsor alanı.">
+            <path class="kit" d="M70,10 Q100,26 130,10 L170,24 L196,70 L166,84 L158,72 L158,212 L42,212 L42,72 L34,84 L4,70 L30,24 Z"/>
+            <path class="kit-line" d="M70,10 Q100,18 130,10"/>
+            <g><rect class="z-team" x="62" y="32" width="76" height="16"/><text class="z-num" x="100.0" y="40.0">7</text></g>
+            <text class="kit-name" x="100" y="80">YILMAZ</text>
+            <text class="z-num" x="100" y="96" style="fill:var(--muted)">8</text>
+            <g><rect class="z-team" x="54" y="124" width="92" height="34"/><text class="z-num" x="100.0" y="141.0">9</text></g>
+          </svg>
+          <figcaption>Forma · arka</figcaption>
+        </figure>
+        <figure class="kit-card">
+          <div class="kit-pair">
+            <svg viewBox="0 0 160 120" role="img" aria-label="Şort: sol paçada sponsor, sağ paçada takım logosu.">
+              <path class="kit" d="M20,8 L140,8 L152,112 L90,112 L80,54 L70,112 L8,112 Z"/>
+              <path class="kit-line" d="M19,20 L141,20"/>
+              <g><rect class="z-team" x="22" y="74" width="38" height="14"/><text class="z-num" x="41.0" y="81.0">10</text></g>
+              <circle class="z-team" cx="120" cy="84" r="8"/><text class="z-num" x="120" y="84">2</text>
+            </svg>
+            <svg viewBox="0 0 160 120" role="img" aria-label="Etek: sol tarafta sponsor, sağ tarafta takım logosu.">
+              <path class="kit" d="M30,8 L130,8 L154,104 L6,104 Z"/>
+              <path class="kit-line" d="M27,20 L133,20 M58,20 L46,104 M80,20 L80,104 M102,20 L114,104"/>
+              <g><rect class="z-team" x="17" y="70" width="30" height="14"/><text class="z-num" x="32.0" y="77.0">10</text></g>
+              <circle class="z-team" cx="126" cy="80" r="8"/><text class="z-num" x="126" y="80">2</text>
+            </svg>
+          </div>
+          <figcaption>Şort ve etek</figcaption>
+        </figure>
+        <figure class="kit-card">
+          <svg viewBox="0 0 160 100" role="img" aria-label="Siperlik: ön bantta sponsor alanı.">
+            <path class="kit" d="M18,42 Q80,28 142,42 Q80,96 18,42 Z"/>
+            <path class="kit" d="M24,18 Q80,4 136,18 L136,42 Q80,30 24,42 Z"/>
+            <g><rect class="z-team" x="58" y="16" width="44" height="13"/><text class="z-num" x="80.0" y="22.5">11</text></g>
+          </svg>
+          <figcaption>Siperlik</figcaption>
+        </figure>
+      </div>
+      <div class="kit-legend">
+        <span><i class="sw t"></i>Takımın sattığı alan</span>
+        <span><i class="sw l"></i>Ligin sattığı alan</span>
+      </div>
+
+      <ol class="kit-key">
+        <li><span class="n">1</span><div><strong>Göğüs ana sponsor</strong><span class="ex">Banka, telekom, otomotiv</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">2</span><div><strong>Takım logosu</strong><span class="ex">Forma, şort ve etekte</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">3</span><div><strong>Forma tedarikçisi</strong><span class="ex">Tüm takımlarda tek spor giyim markası</span></div><span class="owner l">Lig</span></li>
+        <li><span class="n">4</span><div><strong>Ön alt sponsor</strong><span class="ex">Spor içeceği, su</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">5</span><div><strong>Kol: PCL arması</strong><span class="ex">Her takımın formasında aynı yerde</span></div><span class="owner l">Lig</span></li>
+        <li><span class="n">6</span><div><strong>Kol sponsoru</strong><span class="ex">Akıllı saat, giyilebilir teknoloji</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">7</span><div><strong>Sırt üst sponsor</strong><span class="ex">Fintech, kredi kartı</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">8</span><div><strong>Oyuncu soyadı</strong><span class="ex">Esporda oyuncu takma adının yeri</span></div><span class="owner p">Oyuncu</span></li>
+        <li><span class="n">9</span><div><strong>Sırt ana sponsor</strong><span class="ex">Yayın kamerasının en çok gördüğü alan</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">10</span><div><strong>Şort ve etek sponsoru</strong><span class="ex">Sağlık, beslenme</span></div><span class="owner t">Takım</span></li>
+        <li><span class="n">11</span><div><strong>Siperlik sponsoru</strong><span class="ex">Güneş bakımı, gözlük</span></div><span class="owner t">Takım</span></li>
+      </ol>
+
+      <div class="callouts">
+        <p class="note"><strong>Padelde sırt, göğüs kadar değerli.</strong> Padel yayınında ana kamera kortun arkasından, yukarıdan çeker. Oyuncular yayının büyük bölümünde sırtı dönük görünür ve taraf değiştirdikçe iki takımın sırtı da ekrana gelir. Bu yüzden sırt ana sponsoru (9) ana paketin parçası olarak satılır.</p>
+        <p class="note"><strong>Önerilen kural: raket ve ayakkabı oyuncunundur.</strong> Padelde raket, ayakkabı ve çanta genelde oyuncunun kişisel sponsorudur. Takımlar bu kategorilerde forma sponsoru almaz. Resmi maç topunu lig belirler.</p>
+      </div>
+
+      <div class="table-scroll" style="margin-top:2.5rem">
+        <table class="adapt">
+          <thead><tr><th scope="col">Espor formasında</th><th scope="col">PCL'deki karşılığı</th></tr></thead>
+          <tbody>
+            <tr><td>Mouse, klavye, kulaklık markası</td><td>Raket, top ve ayakkabı markaları: oyuncu ve lig sponsorluğu</td></tr>
+            <tr><td>Enerji içeceği</td><td>Spor içeceği ve su: ön alt sponsor ve kort kenarı</td></tr>
+            <tr><td>Bilgisayar ve donanım</td><td>Akıllı saat ve giyilebilir teknoloji: kol sponsoru</td></tr>
+            <tr><td>Oyuncu koltuğu</td><td>Fitness ve rehabilitasyon: Padel House partneri</td></tr>
+            <tr><td>İnternet ve telekom</td><td>Telekom: göğüs sponsoru, yayın ve dijital içerik</td></tr>
+            <tr><td>Kripto ve fintech</td><td>Banka ve fintech: göğüs ve sırt</td></tr>
+            <tr><td>Yemek siparişi</td><td>Beslenme ve sağlıklı gıda: şort ve etek</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
