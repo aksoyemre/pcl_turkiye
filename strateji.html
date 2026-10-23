@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<title>PCL Strateji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400..700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: internal worksheet. Inputs on the left in ledger rows, a sticky result
+   panel on the right; same court-blue identity as the sponsor site. */
+:root {
+  --paper: #F2F5F8; --surface: #FFFFFF; --ink: #0B1D31; --muted: #4F6175; --line: #D3DCE6;
+  --court: #123F7A; --on-court: #F4F8FC; --on-court-muted: #B9CBE2; --court-ink: #123F7A;
+  --red: #D9302A; --red-soft: rgba(217, 48, 42, 0.1); --green: #1E7A4C; --green-soft: rgba(30, 122, 76, 0.1);
+  --sun: #E8A21F;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
+    --court: #0F3A70; --on-court: #F4F8FC; --on-court-muted: #A9BED8; --court-ink: #7FA8DE;
+    --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --green: #4CC38A; --green-soft: rgba(76, 195, 138, 0.14);
+    --sun: #F0B03C;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
+  --court: #0F3A70; --on-court: #F4F8FC; --on-court-muted: #A9BED8; --court-ink: #7FA8DE;
+  --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --green: #4CC38A; --green-soft: rgba(76, 195, 138, 0.14);
+  --sun: #F0B03C;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap {
+  max-width: 76rem; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) {
+  .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); }
+}
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; line-height: 1.05; margin: 0; text-wrap: balance; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.mono { font-family: var(--f-mono); }
+
+header.top { background: var(--court); color: var(--on-court); }
+header.top .wrap { padding-block: 1.25rem 2rem; display: grid; gap: 1.25rem; }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: 13px; }
+.mark { font-family: var(--f-display); font-stretch: 112%; font-weight: 900; font-size: 18px; letter-spacing: 0.02em; }
+.mark span { color: var(--on-court-muted); font-weight: 500; }
+.topline a { color: var(--on-court-muted); text-decoration: none; }
+.topline a:hover { color: var(--on-court); }
+.badge { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px dashed var(--on-court-muted); color: var(--on-court-muted); padding: 0.2rem 0.55rem; }
+header.top h1 { font-size: clamp(2.25rem, 1.6rem + 3vw, 3.5rem); }
+header.top p { margin: 0; max-width: 62ch; color: var(--on-court-muted); font-size: 16px; }
+
+.layout { display: grid; gap: 2rem; padding-block: 2rem 4rem; }
+@media (min-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr) 22rem; align-items: start; } }
+.layout > * { min-width: 0; }
+aside.summary { order: -1; }
+@media (min-width: 1000px) { aside.summary { order: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+
+.block { margin-bottom: 2.5rem; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; }
+.block-head h2 { font-size: 26px; }
+.block-head .sum { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; }
+.block-note { color: var(--muted); font-size: 13px; margin: 0.5rem 0 0; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.35rem; }
+
+.rows { display: grid; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 9.5rem 9rem; gap: 0.75rem; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--line); }
+.row.two { grid-template-columns: minmax(0, 1fr) 8rem 8rem 9rem; }
+.row.head { padding: 0.5rem 0; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.row.head span:not(:first-child) { text-align: right; }
+.row label, .row .lbl { min-width: 0; }
+.row label strong, .row .lbl strong { display: block; font-weight: 600; }
+.row label small, .row .lbl small { display: block; color: var(--muted); font-size: 12.5px; }
+.row output { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.field { display: flex; align-items: center; border: 1px solid var(--line); background: var(--surface); }
+.field:focus-within { border-color: var(--court-ink); box-shadow: 0 0 0 1px var(--court-ink); }
+.field input { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--ink); font: inherit; font-variant-numeric: tabular-nums; text-align: right; padding: 0.45rem 0.5rem; outline: none; }
+.field .u { font-family: var(--f-mono); font-size: 11px; color: var(--muted); padding-right: 0.5rem; }
+@media (max-width: 640px) {
+  .row, .row.two { grid-template-columns: 1fr 1fr; }
+  .row > label, .row > .lbl { grid-column: 1 / -1; }
+  .row.two output { grid-column: 1 / -1; }
+  .row.head { display: none; }
+  .row .field::before { content: attr(data-k); font-family: var(--f-mono); font-size: 10px; color: var(--muted); padding-left: 0.5rem; white-space: nowrap; }
+}
+.assume { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); margin-top: 1rem; }
+.assume label { display: grid; gap: 0.3rem; font-size: 13px; color: var(--muted); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); }
+.panel-sec { padding: 1rem 1.125rem; border-bottom: 1px solid var(--line); }
+.panel-sec:last-child { border-bottom: 0; }
+.kv { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.kv + .kv { margin-top: 0.4rem; }
+.kv span { color: var(--muted); font-size: 13.5px; }
+.kv b { font-family: var(--f-display); font-stretch: 72%; font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; }
+.result { padding: 1.125rem; }
+.result .lab { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+.result .big { display: block; font-family: var(--f-display); font-stretch: 72%; font-weight: 900; font-size: 40px; line-height: 1.05; font-variant-numeric: tabular-nums; margin-top: 0.25rem; }
+.result.neg { background: var(--red-soft); color: var(--red); }
+.result.pos { background: var(--green-soft); color: var(--green); }
+.result .sub { color: var(--ink); font-size: 13px; margin-top: 0.25rem; }
+.target { background: var(--court); color: var(--on-court); }
+.target .lab { color: var(--on-court-muted); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+.target .big { display: block; font-family: var(--f-display); font-stretch: 72%; font-weight: 900; font-size: 32px; line-height: 1.1; font-variant-numeric: tabular-nums; margin-top: 0.25rem; }
+.target p { margin: 0.35rem 0 0; color: var(--on-court-muted); font-size: 13px; }
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+button { font: inherit; font-size: 13px; padding: 0.45rem 0.8rem; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+button:hover { border-color: var(--ink); }
+.saved { font-size: 12px; color: var(--muted); align-self: center; }
+
+/* Bars */
+.bars { display: grid; gap: 0.6rem; margin-top: 0.25rem; }
+.bar-row { display: grid; gap: 0.25rem; }
+.bar-top { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 13px; }
+.bar-top span:last-child { font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+.track { height: 10px; background: transparent; position: relative; }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; min-width: 2px; }
+.fill.cost { background: var(--court-ink); }
+.fill.rev { background: var(--sun); }
+.bar-row:hover .fill { filter: brightness(1.15); }
+.chart-title { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+
+/* Projection */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 34rem; font-variant-numeric: tabular-nums; }
+th, td { padding: 0.6rem 0 0.6rem 0.75rem; border-bottom: 1px solid var(--line); text-align: right; }
+th:first-child, td:first-child { text-align: left; padding-left: 0; }
+thead th { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+tr.total td { font-weight: 700; border-top: 2px solid var(--ink); }
+td.neg { color: var(--red); } td.pos { color: var(--green); }
+.notes { color: var(--muted); font-size: 13px; display: grid; gap: 0.4rem; padding-left: 1.1rem; margin: 1rem 0 0; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="topline">
+      <div class="mark">PCL <span>Türkiye</span></div>
+      <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+        <span class="badge">İç kullanım · Taslak</span>
+        <a href="index.html">← Sponsor sitesi</a>
+      </div>
+    </div>
+    <div>
+      <h1>Strateji: 2027 bütçe ve gelir hesabı</h1>
+      <p style="margin-top:0.75rem">Ligin bir yıllık giderini ve sponsorluk gelirini hesaplar. Tüm rakamlar örnek değerdir, kendi tekliflerinizle değiştirin. Değişiklikler bu tarayıcıda saklanır.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <main>
+    <section class="block">
+      <div class="block-head"><h2>Varsayımlar</h2></div>
+      <div class="assume" id="assume"></div>
+      <p class="block-note">Her sezonda her takım 7 maç oynar: lig usulü, ardından playoff ve final. Yılda 2 sezon (Kış ve Yaz).</p>
+    </section>
+
+    <span class="eyebrow">Giderler</span>
+    <div id="costs"></div>
+
+    <span class="eyebrow">Gelirler</span>
+    <div id="revenues"></div>
+
+    <section class="block">
+      <div class="block-head"><h2>3 yıllık görünüm</h2></div>
+      <div class="assume" id="growth"></div>
+      <div class="table-scroll" style="margin-top:1rem">
+        <table>
+          <thead><tr><th scope="col">Kalem</th><th scope="col">2027</th><th scope="col">2028</th><th scope="col">2029</th><th scope="col">3 yıl</th></tr></thead>
+          <tbody id="proj"></tbody>
+        </table>
+      </div>
+      <ul class="notes">
+        <li>Takım desteği 3 yıl boyunca sabittir (takım başına yıllık tutar).</li>
+        <li>Diğer giderler her yıl maliyet artışı oranıyla büyür. 2027 tek seferlik giderleri sonraki yıllara taşınmaz.</li>
+        <li>Gelirler her yıl gelir artışı oranıyla büyür.</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside class="summary" aria-label="Sonuç">
+    <div class="panel">
+      <div class="panel-sec">
+        <div class="kv"><span>Toplam gider (2027)</span><b id="sGider">0</b></div>
+        <div class="kv"><span>Toplam gelir (2027)</span><b id="sGelir">0</b></div>
+      </div>
+      <div class="result" id="sResultBox">
+        <span class="lab" id="sResultLab">Sonuç</span>
+        <span class="big" id="sResult">0</span>
+        <div class="sub" id="sResultSub"></div>
+      </div>
+      <div class="panel-sec target">
+        <span class="lab">İsim hakkı başa baş fiyatı</span>
+        <span class="big" id="sTitle">0</span>
+        <p>Diğer gelirler sabitken, ligin zarar etmemesi için isim hakkının satılması gereken en düşük yıllık bedel.</p>
+      </div>
+      <div class="panel-sec">
+        <div class="chart-title">Gider dağılımı (2027)</div>
+        <div class="bars" id="costBars"></div>
+      </div>
+      <div class="panel-sec">
+        <div class="chart-title">Gelir dağılımı (2027)</div>
+        <div class="bars" id="revBars"></div>
+      </div>
+      <div class="panel-sec">
+        <div class="kv"><span>Takım desteğinin gidere oranı</span><b id="sShare" style="font-size:18px">0</b></div>
+        <div class="kv"><span>Maç haftası (yıllık)</span><b id="sWeeks" style="font-size:18px">0</b></div>
+        <div class="actions">
+          <button type="button" id="reset">Örnek değerlere dön</button>
+          <span class="saved" id="saved"></span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+(function () {
+  var fmt = new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 });
+  function tl(n) { return fmt.format(Math.round(n)) + ' TL'; }
+  function short(n) {
+    var a = Math.abs(n);
+    if (a >= 1e6) return (n / 1e6).toLocaleString('tr-TR', { maximumFractionDigits: 1 }) + ' Mn TL';
+    if (a >= 1e3) return (n / 1e3).toLocaleString('tr-TR', { maximumFractionDigits: 0 }) + ' B TL';
+    return fmt.format(n) + ' TL';
+  }
+
+  // [id, label, hint, default]
+  var ASSUME = [
+    ['teams', 'Takım sayısı', 8, 'adet'],
+    ['support', 'Takım başına yıllık destek', 1500000, 'TL'],
+    ['seasons', 'Yıllık sezon sayısı', 2, 'adet'],
+    ['weeks', 'Sezon başına maç haftası', 7, 'hafta']
+  ];
+  var GROWTH = [
+    ['costGrowth', 'Yıllık maliyet artışı', 30, '%'],
+    ['revGrowth', 'Yıllık gelir artışı', 30, '%']
+  ];
+  var COSTS = [
+    { id: 'destek', name: 'Takım desteği', kind: 'computed',
+      note: 'Takım sayısı × takım başına yıllık destek.' },
+    { id: 'hafta', name: 'Normal sezon maç haftaları', kind: 'perWeek',
+      note: 'Hafta başına tutar × yıllık maç haftası. Her haftada 4 karşılaşma (8 takım).',
+      items: [
+        ['h_mekan', 'Mekan ve kort kiralama', '', 150000],
+        ['h_hakem', 'Hakem ve maç görevlileri', '', 40000],
+        ['h_icerik', 'Maç günü içerik çekimi', 'Fotoğraf, video, sosyal medya', 60000],
+        ['h_ulasim', 'Ulaşım ve konaklama katkısı', 'Yabancı oyuncular, şehir dışı takımlar', 50000]
+      ] },
+    { id: 'final', name: 'Playoff ve finaller', kind: 'final',
+      note: 'Her sezonun sonunda playoff ve final hafta sonu. Yayın sadece finallerde.',
+      items: [
+        ['f_yayin', 'Yayın prodüksiyonu', 'Kamera, reji, canlı yayın', 600000, 1200000],
+        ['f_mekan', 'Mekan, tribün ve kort kurulumu', 'Taşınabilir cam kort dahil', 800000, 2000000],
+        ['f_gorsel', 'Görseller, panolar, branding', 'Kort, sahne, tribün giydirme', 250000, 500000],
+        ['f_odul', 'Ödül', 'Yaz Finali ödülü daha yüksek', 750000, 2000000],
+        ['f_lojistik', 'Ağırlama, güvenlik, lojistik', '', 300000, 700000]
+      ] },
+    { id: 'dijital', name: 'Dijital hizmetler ve ekip', kind: 'monthly',
+      note: 'Aylık tutar × 12.',
+      items: [
+        ['m_ekip', 'Lig operasyon ekibi', 'Maaşlar', 300000],
+        ['m_dijital', 'Dijital hizmetler', 'Sosyal medya, web, içerik üretimi', 150000],
+        ['m_grafik', 'Grafik ve görsel tasarım', 'Maç görselleri, sponsor içerikleri', 60000],
+        ['m_hukuk', 'Hukuk, muhasebe, sigorta', '', 50000]
+      ] },
+    { id: 'tek', name: '2027 tek seferlik giderler', kind: 'once',
+      note: 'Sadece ilk yıl.',
+      items: [
+        ['o_lansman', 'Lansman etkinliği', '', 750000],
+        ['o_yukselme', 'Yükselme Ligi organizasyonu', 'Tek seferlik lig', 1000000],
+        ['o_marka', 'Marka kimliği ve web sitesi', '', 400000]
+      ] }
+  ];
+  var CONTINGENCY = ['contingency', 'Beklenmeyen giderler payı', 10, '%'];
+  var REVENUES = [
+    { id: 'isim', name: 'İsim hakkı', kind: 'once',
+      note: 'Ligin adında marka: "[Marka] PCL Türkiye". Ana gelir kalemi.',
+      items: [['r_isim', 'İsim hakkı sponsoru', 'Yıllık bedel', 15000000]] },
+    { id: 'partner', name: 'Resmi partnerler', kind: 'count',
+      note: 'Kategori başına tek marka: banka, telekom, otomotiv, içecek gibi.',
+      items: [['r_partner', 'Resmi partner', 'Adet × yıllık bedel', 4, 2500000]] },
+    { id: 'mac', name: 'Maç ve final sponsorları', kind: 'once',
+      items: [
+        ['r_acilis', 'Açılış maçı (Open) sponsoru', '', 1500000],
+        ['r_kadin', 'Kadın çifti maçı sponsoru', '', 1500000],
+        ['r_kisfinal', 'Kış Finali sponsoru', '', 1500000],
+        ['r_yazfinal', 'Yaz Finali sponsoru', 'Yılın en büyük etkinliği', 3000000]
+      ] },
+    { id: 'diger', name: 'Diğer gelirler', kind: 'once',
+      items: [
+        ['r_forma', 'Forma tedarikçisi', 'Tüm takımlarda tek marka', 1500000],
+        ['r_top', 'Resmi top', '', 750000],
+        ['r_yayin', 'Yayın hakları', '', 0],
+        ['r_bilet', 'Bilet ve etkinlik gelirleri', 'Finaller', 500000]
+      ] },
+    { id: 'slot', name: 'Slot giriş bedeli', kind: 'perTeam',
+      note: 'Takım sayısı × giriş bedeli. Sıfır bırakılırsa slot ücretsiz.',
+      items: [['r_slot', 'Takım başına giriş bedeli', 'Tek seferlik, 2027', 0]] }
+  ];
+
+  var KEY = 'pcl-strateji-v1';
+  var state = {};
+  function setDefaults() {
+    state = {};
+    ASSUME.concat(GROWTH, [CONTINGENCY]).forEach(function (a) { state[a[0]] = a[2]; });
+    COSTS.concat(REVENUES).forEach(function (g) {
+      (g.items || []).forEach(function (it) {
+        if (g.kind === 'final') { state[it[0] + '_k'] = it[3]; state[it[0] + '_y'] = it[4]; }
+        else if (g.kind === 'count') { state[it[0] + '_n'] = it[3]; state[it[0]] = it[4]; }
+        else state[it[0]] = it[3];
+      });
+    });
+  }
+  setDefaults();
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved) Object.keys(saved).forEach(function (k) { if (k in state && typeof saved[k] === 'number') state[k] = saved[k]; });
+  } catch (e) {}
+
+  function field(key, unit, k) {
+    return '<span class="field"' + (k ? ' data-k="' + k + '"' : '') + '><input id="in_' + key + '" data-key="' + key +
+      '" inputmode="numeric" autocomplete="off"><span class="u">' + unit + '</span></span>';
+  }
+  function lbl(it) {
+    return '<span class="lbl"><strong>' + it[1] + '</strong>' + (it[2] ? '<small>' + it[2] + '</small>' : '') + '</span>';
+  }
+  function renderAssume(list, el) {
+    el.innerHTML = list.map(function (a) {
+      return '<label>' + a[1] + field(a[0], a[3]) + '</label>';
+    }).join('');
+  }
+  function renderGroup(g, isCost) {
+    var h = '<section class="block"><div class="block-head"><h2>' + g.name + '</h2><span class="sum" id="sum_' + g.id + '"></span></div>';
+    if (g.note) h += '<p class="block-note">' + g.note + '</p>';
+    h += '<div class="rows">';
+    if (g.kind === 'computed') {
+      h += '<div class="row"><span class="lbl"><strong>Takımlara yıllık destek</strong><small id="destekNote"></small></span><span></span><output id="out_destek"></output></div>';
+    } else if (g.kind === 'final') {
+      h += '<div class="row two head"><span>Kalem</span><span>Kış Finali</span><span>Yaz Finali</span><span>Yıllık</span></div>';
+      g.items.forEach(function (it) {
+        h += '<div class="row two">' + lbl(it) + field(it[0] + '_k', 'TL', 'Kış') + field(it[0] + '_y', 'TL', 'Yaz') + '<output id="out_' + it[0] + '"></output></div>';
+      });
+    } else {
+      var head = { perWeek: 'Hafta başına', monthly: 'Aylık', once: 'Tutar', count: 'Birim bedel', perTeam: 'Takım başına' }[g.kind];
+      h += '<div class="row head"><span>Kalem</span><span>' + head + '</span><span>Yıllık</span></div>';
+      g.items.forEach(function (it) {
+        if (g.kind === 'count') {
+          h += '<div class="row two">' + lbl(it) + field(it[0] + '_n', 'adet', 'Adet') + field(it[0], 'TL', 'Bedel') + '<output id="out_' + it[0] + '"></output></div>';
+        } else {
+          h += '<div class="row">' + lbl(it) + field(it[0], 'TL', head) + '<output id="out_' + it[0] + '"></output></div>';
+        }
+      });
+    }
+    h += '</div>';
+    if (isCost && g.id === 'tek') {
+      h += '<div class="rows" style="margin-top:1.5rem"><div class="row">' + lbl([0, CONTINGENCY[1], 'Takım desteği hariç tüm giderlerin yüzdesi']) +
+        field(CONTINGENCY[0], '%') + '<output id="out_contingency"></output></div></div>';
+    }
+    return h + '</section>';
+  }
+  renderAssume(ASSUME, document.getElementById('assume'));
+  renderAssume(GROWTH, document.getElementById('growth'));
+  document.getElementById('costs').innerHTML = COSTS.map(function (g) { return renderGroup(g, true); }).join('');
+  document.getElementById('revenues').innerHTML = REVENUES.map(function (g) { return renderGroup(g, false); }).join('');
+
+  var inputs = Array.prototype.slice.call(document.querySelectorAll('input[data-key]'));
+  function show(inp) { inp.value = fmt.format(state[inp.dataset.key]); }
+  inputs.forEach(function (inp) {
+    if (!inp.closest('label')) {
+      var row = inp.closest('.row'), f = inp.closest('.field');
+      var name = row && row.querySelector('strong') ? row.querySelector('strong').textContent : inp.dataset.key;
+      inp.setAttribute('aria-label', name + (f.dataset.k ? ' (' + f.dataset.k + ')' : ''));
+    }
+    show(inp);
+    inp.addEventListener('input', function () {
+      var n = parseInt(inp.value.replace(/\D/g, ''), 10);
+      state[inp.dataset.key] = isNaN(n) ? 0 : n;
+      update(true);
+    });
+    inp.addEventListener('blur', function () { show(inp); });
+    inp.addEventListener('focus', function () { inp.select(); });
+  });
+
+  function compute() {
+    var s = state, weeks = s.seasons * s.weeks;
+    var c = { destek: s.teams * s.support, items: {} }, groups = {};
+    COSTS.forEach(function (g) {
+      if (g.kind === 'computed') { groups[g.id] = c.destek; return; }
+      var t = 0;
+      g.items.forEach(function (it) {
+        var v = g.kind === 'perWeek' ? s[it[0]] * weeks
+          : g.kind === 'monthly' ? s[it[0]] * 12
+          : g.kind === 'final' ? s[it[0] + '_k'] + s[it[0] + '_y']
+          : s[it[0]];
+        c.items[it[0]] = v; t += v;
+      });
+      groups[g.id] = t;
+    });
+    var opsRecurring = groups.hafta + groups.final + groups.dijital;
+    var cont = (opsRecurring + groups.tek) * s.contingency / 100;
+    groups.cont = cont;
+    var gider = c.destek + opsRecurring + groups.tek + cont;
+
+    var rg = {}, gelir = 0;
+    REVENUES.forEach(function (g) {
+      var t = 0;
+      g.items.forEach(function (it) {
+        var v = g.kind === 'count' ? s[it[0] + '_n'] * s[it[0]]
+          : g.kind === 'perTeam' ? s[it[0]] * s.teams
+          : s[it[0]];
+        c.items[it[0]] = v; t += v;
+      });
+      rg[g.id] = t; gelir += t;
+    });
+    return { weeks: weeks, groups: groups, rg: rg, items: c.items, opsRecurring: opsRecurring, gider: gider, gelir: gelir };
+  }
+
+  function bars(el, rows, cls) {
+    var max = Math.max.apply(null, rows.map(function (r) { return r[1]; }).concat([1]));
+    var total = rows.reduce(function (a, r) { return a + r[1]; }, 0) || 1;
+    el.innerHTML = rows.map(function (r) {
+      var pct = Math.round(r[1] / total * 100);
+      return '<div class="bar-row" title="' + r[0] + ': ' + tl(r[1]) + ' (%' + pct + ')"><div class="bar-top"><span>' + r[0] +
+        '</span><span>' + short(r[1]) + ' · %' + pct + '</span></div><div class="track"><div class="fill ' + cls +
+        '" style="width:' + (r[1] / max * 100) + '%"></div></div></div>';
+    }).join('');
+  }
+
+  var saveTimer;
+  function update(persist) {
+    var r = compute(), s = state;
+    document.getElementById('out_destek').textContent = tl(r.groups.destek);
+    document.getElementById('destekNote').textContent = s.teams + ' takım × ' + tl(s.support);
+    Object.keys(r.items).forEach(function (k) {
+      var o = document.getElementById('out_' + k); if (o) o.textContent = tl(r.items[k]);
+    });
+    document.getElementById('out_contingency').textContent = tl(r.groups.cont);
+    COSTS.forEach(function (g) { document.getElementById('sum_' + g.id).textContent = tl(r.groups[g.id]); });
+    REVENUES.forEach(function (g) { document.getElementById('sum_' + g.id).textContent = tl(r.rg[g.id]); });
+
+    var diff = r.gelir - r.gider;
+    document.getElementById('sGider').textContent = short(r.gider);
+    document.getElementById('sGelir').textContent = short(r.gelir);
+    var box = document.getElementById('sResultBox');
+    box.className = 'result ' + (diff < 0 ? 'neg' : 'pos');
+    document.getElementById('sResultLab').textContent = diff < 0 ? 'Açık (2027)' : 'Fazla (2027)';
+    document.getElementById('sResult').textContent = (diff < 0 ? '−' : '+') + tl(Math.abs(diff));
+    document.getElementById('sResultSub').textContent = diff < 0
+      ? 'Gelirler gideri karşılamıyor. İsim hakkı fiyatını ya da sponsor sayısını artırın.'
+      : 'Gelirler gideri karşılıyor.';
+    var titleNeed = r.gider - (r.gelir - r.items.r_isim);
+    document.getElementById('sTitle').textContent = tl(Math.max(0, titleNeed));
+    document.getElementById('sShare').textContent = '%' + Math.round(r.groups.destek / (r.gider || 1) * 100);
+    document.getElementById('sWeeks').textContent = r.weeks;
+
+    bars(document.getElementById('costBars'), [
+      ['Takım desteği', r.groups.destek], ['Maç haftaları', r.groups.hafta], ['Playoff ve finaller', r.groups.final],
+      ['Dijital ve ekip', r.groups.dijital], ['Tek seferlik', r.groups.tek], ['Beklenmeyen', r.groups.cont]
+    ], 'cost');
+    bars(document.getElementById('revBars'), [
+      ['İsim hakkı', r.rg.isim], ['Resmi partnerler', r.rg.partner], ['Maç ve final sponsorları', r.rg.mac],
+      ['Diğer gelirler', r.rg.diger], ['Slot giriş bedeli', r.rg.slot]
+    ], 'rev');
+
+    // 3-year projection
+    var cg = 1 + s.costGrowth / 100, gg = 1 + s.revGrowth / 100, cf = 1 + s.contingency / 100;
+    var cols = [0, 1, 2].map(function (y) {
+      var ops = (r.opsRecurring * Math.pow(cg, y) + (y === 0 ? r.groups.tek : 0)) * cf;
+      var rev = (r.gelir - (y === 0 ? 0 : r.rg.slot)) * Math.pow(gg, y);
+      return { destek: r.groups.destek, ops: ops, gider: r.groups.destek + ops, gelir: rev, fark: rev - r.groups.destek - ops };
+    });
+    var sum = function (k) { return cols.reduce(function (a, c) { return a + c[k]; }, 0); };
+    function row(name, k, total, signed) {
+      var cells = cols.map(function (c) { return c[k]; }).concat([sum(k)]);
+      return '<tr' + (total ? ' class="total"' : '') + '><td>' + name + '</td>' + cells.map(function (v) {
+        return '<td' + (signed ? ' class="' + (v < 0 ? 'neg' : 'pos') + '"' : '') + '>' + (signed && v > 0 ? '+' : '') + (signed && v < 0 ? '−' : '') + short(Math.abs(v)) + '</td>';
+      }).join('') + '</tr>';
+    }
+    document.getElementById('proj').innerHTML =
+      row('Takım desteği', 'destek') + row('Operasyon giderleri', 'ops') + row('Toplam gider', 'gider', true) +
+      row('Toplam gelir', 'gelir') + row('Fark', 'fark', true, true);
+
+    if (persist) {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); document.getElementById('saved').textContent = 'Bu tarayıcıda kaydedildi'; } catch (e) {}
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function () { document.getElementById('saved').textContent = ''; }, 2000);
+    }
+  }
+
+  document.getElementById('reset').addEventListener('click', function () {
+    setDefaults();
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    inputs.forEach(show);
+    update(false);
+  });
+  update(false);
+})();
+</script>
+</body>
+</html>
