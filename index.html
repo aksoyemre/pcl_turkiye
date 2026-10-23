@@ -27,6 +27,8 @@
   --court-ink: #123F7A;
   --red: #D9302A;
   --red-soft: rgba(217, 48, 42, 0.1);
+  --sun: #E8A21F;
+  --on-sun: #1C1405;
   --blue-soft: rgba(18, 63, 122, 0.1);
 
   --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
@@ -45,14 +47,14 @@
   :root:not([data-theme="light"]) {
     --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
     --court: #0F3A70; --court-deep: #0A2A52; --on-court: #F4F8FC; --on-court-muted: #A9BED8;
-    --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --blue-soft: rgba(127, 168, 222, 0.16);
+    --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --sun: #F0B03C; --on-sun: #1C1405; --blue-soft: rgba(127, 168, 222, 0.16);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #07121E; --surface: #0D1D2F; --ink: #E6EDF5; --muted: #93A6BB; --line: #1E3248;
   --court: #0F3A70; --court-deep: #0A2A52; --on-court: #F4F8FC; --on-court-muted: #A9BED8;
-  --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --blue-soft: rgba(127, 168, 222, 0.16);
+  --court-line: rgba(244, 248, 252, 0.82); --court-ink: #7FA8DE; --red: #FF5A52; --red-soft: rgba(255, 90, 82, 0.14); --sun: #F0B03C; --on-sun: #1C1405; --blue-soft: rgba(127, 168, 222, 0.16);
   color-scheme: dark;
 }
 
@@ -347,6 +349,7 @@ td:nth-child(2) { color: var(--muted); width: 33%; }
 .g-bar { align-self: center; margin: 0 3px; height: 1.9rem; display: flex; align-items: center; padding: 0 0.5rem; font-size: 0.75rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; z-index: 1; min-width: 0; }
 .g-bar.pcl, .sw.g-pcl { background: var(--court); color: var(--on-court); border: 1px solid var(--court); }
 .g-bar.yuk, .sw.g-yuk { background: var(--red-soft); color: var(--ink); border: 1px solid var(--red); }
+.g-bar.sun, .sw.g-sun { background: var(--sun); color: var(--on-sun); border: 1px solid var(--sun); }
 .g-bar.dy, .sw.g-dy { background: var(--red); color: var(--on-court); border: 1px solid var(--red); }
 .g-bar.tr, .sw.g-tr { background: transparent; color: var(--muted); border: 1px dashed var(--muted); }
 .months { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
@@ -357,6 +360,17 @@ td:nth-child(2) { color: var(--muted); width: 33%; }
 .months strong { font-family: var(--f-display); font-stretch: 80%; font-weight: 800; font-size: 1.25rem; line-height: 1.15; }
 .months li > span:last-child { color: var(--muted); font-size: 0.9375rem; }
 .releg { margin-top: 3rem; }
+.cups { display: grid; gap: 1rem; }
+@media (min-width: 720px) { .cups { grid-template-columns: 1fr 1.25fr; } }
+.cup { padding: 1.5rem; display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
+.cup.winter { background: var(--court); color: var(--on-court); }
+.cup.summer { background: var(--sun); color: var(--on-sun); }
+.cup-when { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.8; }
+.cup strong { font-family: var(--f-display); font-stretch: 72%; font-weight: 900; font-size: var(--step-4); line-height: 1; }
+.cup.summer strong { font-stretch: 85%; }
+.cup ul { margin: 0.5rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.375rem; font-size: 0.9375rem; }
+.cup li { padding-left: 1rem; position: relative; }
+.cup li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.45rem; height: 2px; background: currentColor; opacity: 0.6; }
 .ties { display: grid; gap: 1rem; }
 @media (min-width: 720px) { .ties { grid-template-columns: 1fr 1fr; } }
 .tie { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; border: 1px solid var(--line); background: var(--surface); min-width: 0; }
@@ -469,7 +483,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
             <tr><td>Lig hakkı</td><td>Partner takım slotu</td><td>Takım sahibine ait franchise slotu, organizasyon onayıyla devredilir</td></tr>
             <tr><td>Antrenman üssü</td><td>Gaming house</td><td>Padel House: haftalık sabit kort saati, antrenör, kondisyoner, fizyoterapist</td></tr>
             <tr><td>Kadro</td><td>Ana kadro, yedekler, ithal oyuncu sınırı</td><td>6 kişilik takım, en az 3 kadın oyuncu, en fazla 2 yabancı</td></tr>
-            <tr><td>Lig desteği</td><td>Aylık destek ve gelir payı</td><td>Takım başına yıllık 1.500.000 TL, 3 sezon boyunca</td></tr>
+            <tr><td>Lig desteği</td><td>Aylık destek ve gelir payı</td><td>Takım başına yıllık 1.500.000 TL, 3 yıl boyunca</td></tr>
             <tr><td>Yayın ve içerik</td><td>Stüdyo maçları, yayın, sosyal medya</td><td>Merkezi etkinlik haftaları, cam kort yayını, takım içerik kotası</td></tr>
           </tbody>
         </table>
@@ -563,7 +577,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <div>
           <h3>Takım sahibinin taahhütleri</h3>
           <ul>
-            <li><strong>Çok sezonluk taahhüt</strong><span>İlk dönem için en az 3 sezon.</span></li>
+            <li><strong>Çok yıllık taahhüt</strong><span>İlk dönem için en az 3 yıl.</span></li>
             <li><strong>Oyuncu standardı</strong><span>Lig tarafından belirlenen asgari maaş ve standart sözleşme.</span></li>
             <li><strong>Padel House</strong><span>Lig standardında antrenman tesisi ve teknik ekip.</span></li>
             <li><strong>İçerik ve altyapı</strong><span>Aylık içerik kotası, kadın oyuncu ve altyapı programı.</span></li>
@@ -588,14 +602,14 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
       <div class="block-head">
         <span class="eyebrow">Lig desteği</span>
         <h2>Para nereden gelir, nereye gider</h2>
-        <p class="lede">Takımı sahibinin yatırımı, lig desteği ve takımın kendi sponsorları birlikte finanse eder. Lig her takıma ilk 3 sezon boyunca yıllık destek verir.</p>
+        <p class="lede">Takımı sahibinin yatırımı, lig desteği ve takımın kendi sponsorları birlikte finanse eder. Lig her takıma ilk 3 yıl boyunca yıllık destek verir.</p>
       </div>
 
       <div class="flow">
         <div class="flow-col">
           <h4>Takıma gelen</h4>
           <div class="flow-item"><strong>Takım sahibi</strong><span>Kuruluş ve işletme yatırımı</span></div>
-          <div class="flow-item league"><strong>PCL desteği</strong><span>Yıllık 1.500.000 TL, 3 sezon boyunca</span></div>
+          <div class="flow-item league"><strong>PCL desteği</strong><span>Yıllık 1.500.000 TL, 3 yıl boyunca</span></div>
           <div class="flow-item"><strong>Takım sponsorları</strong><span>Forma, isim, ürün</span></div>
         </div>
         <div class="arrow" aria-hidden="true"></div>
@@ -614,15 +628,15 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <div class="grant-main">
           <span class="tag">Takım başına lig desteği</span>
           <b>1.500.000 TL</b>
-          <span>her yıl, 3 sezon boyunca</span>
+          <span>her yıl, 3 yıl boyunca</span>
         </div>
         <dl class="grant-facts">
-          <div><dt>3 sezon toplamı</dt><dd>4.500.000 TL</dd></div>
+          <div><dt>3 yıl toplamı</dt><dd>4.500.000 TL</dd></div>
           <div><dt>Aylık karşılığı</dt><dd>125.000 TL</dd></div>
           <div><dt>Kullanım alanları</dt><dd class="txt">Oyuncu maaşları, Padel House, dijital içerik, altyapı</dd></div>
         </dl>
       </div>
-      <p class="note"><strong>Neden 3 yıl?</strong> Destek, takım sahibinin ilk 3 sezonluk taahhüdüyle aynı süreyi kapsar. Takım sahibi ilk dönemin bütçesini bu güvenceyle planlar.</p>
+      <p class="note"><strong>Neden 3 yıl?</strong> Destek, takım sahibinin ilk 3 yıllık taahhüdüyle aynı süreyi kapsar. Takım sahibi ilk dönemin bütçesini bu güvenceyle planlar.</p>
     </div>
   </section>
 
@@ -641,7 +655,7 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
         <div class="asset"><span class="tier">Yayın</span><strong>Altın sayı anı</strong><span>Oyunun düğümlendiği deuce sayısında ekran grafiği ve tekrar.</span></div>
         <div class="asset"><span class="tier">Yayın</span><strong>Skor tabelası ve istatistikler</strong><span>Yayın grafikleri ve maç sonu istatistik kartları.</span></div>
         <div class="asset"><span class="tier">Dijital</span><strong>Belgesel ve içerik serileri</strong><span>Padel House'tan sezon boyu kamera arkası.</span></div>
-        <div class="asset"><span class="tier">Etkinlik</span><strong>Etkinlik haftası alanı</strong><span>Merkezi etkinliklerde deneyim ve stant alanı.</span></div>
+        <div class="asset"><span class="tier">Etkinlik</span><strong>Yaz Finali sponsoru</strong><span>Yılın en büyük etkinliğinde isim hakkı, deneyim ve stant alanı.</span></div>
       </div>
     </div>
   </section>
@@ -750,12 +764,33 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
     <div class="wrap">
       <div class="block-head">
         <span class="eyebrow">2027 takvimi</span>
-        <h2>İlk sezon: 2027</h2>
-        <p class="lede">Normal sezon iki devrede oynanır. Yazın Yükselme Ligi oynanır. Sezon sonunda bir kereye mahsus düşme-yükselme maçları yapılır ve 2028'in 8 takımı belirlenir.</p>
+        <h2>Bir yıl, iki sezon, iki kupa</h2>
+        <p class="lede">Her yıl Kış Sezonu ve Yaz Sezonu oynanır. İki sezonun ayrı şampiyonu, ayrı kupası olur. Yaz Finali yılın en büyük etkinliğidir ve ödülü daha yüksektir.</p>
       </div>
 
-      <div class="gantt-scroll">
-        <div class="gantt" aria-label="2027 sezon takvimi, aylara göre">
+      <div class="cups">
+        <div class="cup winter">
+          <span class="cup-when">Şubat – Mayıs</span>
+          <strong>Kış Kupası</strong>
+          <ul>
+            <li>7 maç haftası: her takım diğer 7 takımla bir kez karşılaşır</li>
+            <li>İlk 4 takım playoff oynar</li>
+            <li>Mayıs'ta Kış Finali</li>
+          </ul>
+        </div>
+        <div class="cup summer">
+          <span class="cup-when">Temmuz – Eylül</span>
+          <strong>Yaz Kupası</strong>
+          <ul>
+            <li>7 maç haftası, ardından ilk 4 takımla playoff</li>
+            <li>Eylül'de Büyük Final: yılın en büyük etkinliği</li>
+            <li>Yılın en yüksek ödülü</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gantt-scroll" style="margin-top:2.5rem">
+        <div class="gantt" aria-label="2027 takvimi, aylara göre">
           <div class="g-month" style="grid-column:2">Oca</div>
           <div class="g-month" style="grid-column:3">Şub</div>
           <div class="g-month" style="grid-column:4">Mar</div>
@@ -768,41 +803,43 @@ footer .wrap { padding-block: 1.5rem; display: flex; justify-content: space-betw
           <div class="g-month" style="grid-column:11">Eki</div>
           <div class="g-month" style="grid-column:12">Kas</div>
           <div class="g-month" style="grid-column:13">Ara</div>
-          <div class="g-label" style="grid-row:2">Kadro ve transfer</div>
-          <div class="g-bar tr" style="grid-row:2;grid-column:2 / 4">Transfer dönemi</div>
+          <div class="g-label" style="grid-row:2">Transfer</div>
+          <div class="g-bar tr" style="grid-row:2;grid-column:2 / 3">Kadro</div>
+          <div class="g-bar tr" style="grid-row:2;grid-column:7 / 8">Yaz</div>
           <div class="g-bar tr" style="grid-row:2;grid-column:13 / 14">2028</div>
-          <div class="g-label" style="grid-row:3">PCL normal sezon</div>
-          <div class="g-bar pcl" style="grid-row:3;grid-column:4 / 7">1. devre · 7 hafta</div>
-          <div class="g-bar pcl" style="grid-row:3;grid-column:10 / 12">2. devre · 7 hafta</div>
-          <div class="g-label" style="grid-row:4">Yükselme Ligi</div>
-          <div class="g-bar yuk" style="grid-row:4;grid-column:7 / 10">Tek seferlik lig</div>
-          <div class="g-label" style="grid-row:5">Düşme-yükselme</div>
-          <div class="g-bar dy" style="grid-row:5;grid-column:12 / 13">Maçlar</div>
-          <div class="g-label" style="grid-row:6">Playoff ve final</div>
-          <div class="g-bar pcl" style="grid-row:6;grid-column:12 / 13">Playoff</div>
-          <div class="g-bar pcl" style="grid-row:6;grid-column:13 / 14">Final</div>
+          <div class="g-label" style="grid-row:3">Kış Sezonu</div>
+          <div class="g-bar pcl" style="grid-row:3;grid-column:3 / 6">Normal sezon · 7 hafta</div>
+          <div class="g-bar pcl" style="grid-row:3;grid-column:6 / 7">Final</div>
+          <div class="g-label" style="grid-row:4">Yaz Sezonu</div>
+          <div class="g-bar sun" style="grid-row:4;grid-column:8 / 10">Normal sezon · 7 hafta</div>
+          <div class="g-bar sun" style="grid-row:4;grid-column:10 / 11" title="Büyük final">Final</div>
+          <div class="g-label" style="grid-row:5">Yükselme Ligi</div>
+          <div class="g-bar yuk" style="grid-row:5;grid-column:10 / 12">Tek seferlik lig</div>
+          <div class="g-label" style="grid-row:6">Düşme-yükselme</div>
+          <div class="g-bar dy" style="grid-row:6;grid-column:12 / 13">Maçlar</div>
         </div>
       </div>
       <div class="kit-legend">
-        <span><i class="sw g-pcl"></i>PCL</span>
+        <span><i class="sw g-pcl"></i>Kış Sezonu</span>
+        <span><i class="sw g-sun"></i>Yaz Sezonu</span>
         <span><i class="sw g-yuk"></i>Yükselme Ligi</span>
         <span><i class="sw g-dy"></i>Düşme-yükselme</span>
         <span><i class="sw g-tr"></i>Transfer dönemi</span>
       </div>
 
       <ol class="months">
-        <li><span class="phase">Ocak – Şubat</span><strong>Kadro ve transfer</strong><span>Takımlar 6 kişilik kadrolarını tescil ettirir. Şubat'ta forma lansmanı ve medya günü.</span></li>
-        <li><span class="phase">Mart – Mayıs</span><strong>Normal sezon, 1. devre</strong><span>Her takım diğer 7 takımla bir kez karşılaşır. 7 maç haftası, her haftada 4 karşılaşma.</span></li>
-        <li><span class="phase">Haziran – Ağustos</span><strong>Yükselme Ligi</strong><span>PCL sezon arasındayken Yükselme Ligi oynanır. İlk iki takım düşme-yükselme maçlarına kalır.</span></li>
-        <li><span class="phase">Eylül – Ekim</span><strong>Normal sezon, 2. devre</strong><span>İkinci 7 maç haftası. Sezon sonunda ilk 4 playoff'a, son 2 düşme-yükselmeye kalır.</span></li>
-        <li><span class="phase">Kasım</span><strong>Playoff ve düşme-yükselme</strong><span>İlk 4 takım şampiyonluk için, son 2 takım PCL'de kalmak için oynar.</span></li>
-        <li><span class="phase">Aralık</span><strong>Final hafta sonu</strong><span>Şampiyon belirlenir. 2028 transfer dönemi açılır.</span></li>
+        <li><span class="phase">Ocak</span><strong>Kadro ve transfer</strong><span>Takımlar 6 kişilik kadrolarını tescil ettirir. Forma lansmanı ve medya günü.</span></li>
+        <li><span class="phase">Şubat – Mayıs</span><strong>Kış Sezonu</strong><span>7 maç haftası, playoff ve Mayıs'ta Kış Finali. İlk kupa sahibini bulur.</span></li>
+        <li><span class="phase">Haziran</span><strong>Yaz transfer dönemi</strong><span>Takımlar kadrolarını Yaz Sezonu için güçlendirir.</span></li>
+        <li><span class="phase">Temmuz – Eylül</span><strong>Yaz Sezonu</strong><span>7 maç haftası ve playoff. Eylül'de Büyük Final, yılın en yüksek ödülüyle.</span></li>
+        <li><span class="phase">Eylül – Ekim</span><strong>Yükselme Ligi</strong><span>Tek seferlik lig. İlk iki takım düşme-yükselme maçlarına kalır.</span></li>
+        <li><span class="phase">Kasım – Aralık</span><strong>Düşme-yükselme ve 2028</strong><span>Kasım'da düşme-yükselme maçları. Aralık'ta 2028 transfer dönemi açılır.</span></li>
       </ol>
 
       <div class="releg">
         <div class="block-head" style="margin-bottom:1.25rem">
           <h3>Düşme-yükselme: 2027'de bir kereye mahsus</h3>
-          <p style="color:var(--muted)">PCL'nin son iki takımı, Yükselme Ligi'nin ilk iki takımıyla karşılaşır. Her eşleşme normal karşılaşma formatında oynanır: üç maçın ikisini alan kazanır. Kazananlar 2028'de PCL'de oynar.</p>
+          <p style="color:var(--muted)">Kış ve Yaz sezonlarının birleşik sıralamasında son iki sıradaki PCL takımı, Yükselme Ligi'nin ilk iki takımıyla karşılaşır. Her eşleşme normal formatta oynanır: üç maçın ikisini alan kazanır. Kazananlar 2028'de PCL'de oynar.</p>
         </div>
         <div class="ties">
           <div class="tie">
